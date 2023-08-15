@@ -16,14 +16,12 @@ const TableOfContents = ({ slug, items, depth }) => {
               <Link
                 id={hash}
                 to={`${slug}${hash}`}
-                className={`not-prose text-xs inline-flex items-center p-1 no-underline hover:text-white text-violet-${
-                  depth + 3
-                }00`}
+                className={`not-prose text-xs inline-flex items-center p-1 no-underline m-table-content-link`}
               >
                 {depth > 0 ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className={`mr-1 h-4 w-4 stroke-muted ${depth === 1 ? 'rotate-90' : ''}`}
+                    className={`mr-1 h-4 w-4 m-stroke ${depth === 1 ? 'rotate-90' : ''}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth="2"

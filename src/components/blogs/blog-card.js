@@ -3,20 +3,22 @@ import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
-import DateStamp from '../date-stamp';
+import DateStamp from '../partials/date-stamp';
 
 const BlogCard = ({ link, title, thumbnail, date, dateModified, excerpt }) => {
   return (
-    <li className="m-0 p-0 rounded border border-outline bg-surface transition-all shadow-lg hover:shadow-secondary/10 hover:-translate-y-2 ease-in-out duration-500">
-      <Link to={link} className="block p-4 cursor-pointer no-underline hover:text-secondary ">
-        <div className="flex flex-col sm:flex-row gap-4 items-center">
+    // <li className="m-0 p-0 rounded border-b m-border transition-all m-content-item hover:-translate-y-1 ease-in-out duration-500">
+    <li className="m-0 p-0 rounded border m-border transition-all shadow-lg hover:shadow-fuchsia/10 hover:-translate-y-2 ease-in-out duration-500">
+      <Link to={link} className="block p-4 cursor-pointer no-underline">
+        {/* <div className="flex flex-col sm:flex-row gap-4 items-center"> */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 mb-2">
           <div className="rounded shadow-lg overflow-hidden shrink-0 w-[180px]">
             <GatsbyImage alt={title} image={getImage(thumbnail)} />
           </div>
           <div>
             <DateStamp date={dateModified ? dateModified : date} />
-            <h3 className="m-0 text-xl text-white">{title}</h3>
-            <p className="m-0 text-slate-300 text-base ">{excerpt}</p>
+            <h3 className="m-0 text-xl">{title}</h3>
+            <p className="m-0 text-base m-sub-text">{excerpt}</p>
           </div>
         </div>
       </Link>

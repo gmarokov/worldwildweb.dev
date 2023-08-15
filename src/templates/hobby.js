@@ -1,14 +1,11 @@
 import React, { Fragment } from 'react';
 import { graphql } from 'gatsby';
-
-import MdxParser from '../components/mdx-parser';
-
+import MdxParser from '../components/partials/mdx-parser';
 import AsideElement from '../components/aside/aside-element';
-import DateStamp from '../components/date-stamp';
+import DateStamp from '../components/partials/date-stamp';
 import GenericAside from '../components/aside/generic-aside';
-import AddReaction from '../components/add-reaction';
-import Tag from '../components/tag';
-import Seo from '../components/seo';
+import Tag from '../components/partials/tag';
+import Seo from '../components/partials/seo';
 
 const Page = ({
   data: {
@@ -24,7 +21,7 @@ const Page = ({
     <Fragment>
       <div className="grid lg:grid-cols-1fr-auto">
         <DateStamp date={date} />
-        <small className="leading-6 font-semibold text-secondary">
+        <small className="leading-6 font-semibold m-sub-text">
           Role &bull; {role} &#124; {category}
         </small>
       </div>
@@ -41,7 +38,6 @@ const Page = ({
           : null}
       </ul>
       <MdxParser>{body}</MdxParser>
-      <AddReaction title={title} slug={slug} />
       <AsideElement>
         <GenericAside />
       </AsideElement>

@@ -20,7 +20,7 @@ const PageElement = ({ children, location: { pathname } }) => {
                 role="button"
                 onClick={handleNav}
                 onKeyDown={handleNav}
-                className={`site-lightbox z-20 top-0 w-screen h-screen bg-black opacity-80 ${
+                className={`site-lightbox z-20 top-0 w-screen h-screen opacity-80  ${
                   isNavOpen ? 'fixed lg:hidden' : 'hidden'
                 }`}
               />
@@ -32,7 +32,9 @@ const PageElement = ({ children, location: { pathname } }) => {
           <SidebarNav pathname={pathname} />
           <main className="site-body lg:pl-[14.5rem]">
             <section className="mx-auto pt-6 max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
-              <article className="prose prose-lg max-w-none min-h-[calc(100vh-19rem)]">{children}</article>
+              <article className="prose-lg prose dark:prose-dark max-w-none min-h-[calc(100vh-19rem)]">
+                {children}
+              </article>
               <Footer />
             </section>
           </main>

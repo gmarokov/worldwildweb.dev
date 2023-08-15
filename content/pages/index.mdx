@@ -6,16 +6,18 @@ icon:
   011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z
 ---
 
-import RecentGitHubUserEvent from '../../src/components/recent-github-user-events';
-import RecentTweets from '../../src/components/recent-tweets';
+import RecentGitHubUserEvent from '../../src/components/partials/recent-github-user-events';
+import RecentTweets from '../../src/components/partials/recent-tweets';
 
 import LatestProjects from '../../src/components/projects/latest-projects';
 import LatestHobbies from '../../src/components/hobbies/latest-hobbies';
 import LatestBlogs from '../../src/components/blogs/latest-blogs';
 
-<h1 className="!mb-0">Georgi Marokov</h1>
+<h1 className="!mb-0">Welcome, to (my) Georgi Marokov's website</h1>
 
 **Software Engineer [@Modeshift](https://twitter.com/GoModeshift)**
+
+a father @home, a mountain bike lover @themountain
 
 Hi 👋, I'm Georgi Marokov and I'm a full stack software engineer. I'm really into resolving complex issues, dive deep in
 to the problem and finding elegant solution.
@@ -24,13 +26,11 @@ I spend my free time with family and friends, riding bikes, hiking peaks and tak
 
 Wanna share some ideas? Don't hesitate and contact me!
 
-<div className="grid md:grid-cols-1fr-1fr gap-8 my-20">
-  <RecentGitHubUserEvent />
-  <RecentTweets />
-</div>
+<hr className="border m-border my-8" />
 
 <div className="grid gap-32">
   <LatestBlogs />
+  <hr className="m-border my-8" />
   <LatestHobbies />
   <LatestProjects />
 </div>

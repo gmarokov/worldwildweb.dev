@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const DateStamp = ({ date }) => {
-  return <time className="leading-6 font-semibold text-primary">{date}</time>;
+  return <time className="leading-6">{date}</time>;
 };
 
 DateStamp.propTypes = {

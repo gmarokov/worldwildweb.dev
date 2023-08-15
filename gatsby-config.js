@@ -56,6 +56,14 @@ module.exports = {
       }
     },
     {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /static/
+        }
+      }
+    },
+    {
       resolve: 'gatsby-plugin-sharp',
       options: {
         defaults: {

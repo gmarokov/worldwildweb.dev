@@ -9,8 +9,8 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import MarkdownCtaLink from './markdown-cta-link';
 import PrismSyntaxHighlight from './prism-syntax-highlight.js';
 
-import { transformImages } from '../utils/transform-images';
-import { stripLeadingSlash } from '../utils/strip-leading-slash';
+import { transformImages } from '../../utils/transform-images';
+import { stripLeadingSlash } from '../../utils/strip-leading-slash';
 
 const components = {
   a: ({ href, children }) => {

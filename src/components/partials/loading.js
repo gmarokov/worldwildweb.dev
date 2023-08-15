@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const Loading = ({ className }) => {
+const Loading = () => {
   return (
     <div role="status">
       <svg
         aria-hidden="true"
-        className={`text-outline animate-spin w-9 h-9 ${className}`}
+        className={`animate-spin w-9 h-9 m-fill`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -23,15 +22,6 @@ const Loading = ({ className }) => {
       <span className="sr-only">Loading...</span>
     </div>
   );
-};
-
-Loading.defaultProps = {
-  className: 'fill-salmon'
-};
-
-Loading.propTypes = {
-  /** The class names to apply */
-  className: PropTypes.string
 };
 
 export default Loading;

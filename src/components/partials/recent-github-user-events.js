@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, Fragment } from 'react';
 
-import Loading from '../components/loading';
+import Loading from './loading';
 
-import { formatDatestamp } from '../utils/format-date-stamp';
+import { formatDatestamp } from '../../utils/format-date-stamp';
 
 const RecentGitHubUserEvent = () => {
   const isMounted = useRef(false);
@@ -55,25 +55,25 @@ const RecentGitHubUserEvent = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-stretch rounded border border-outline bg-surface p-4">
+    <div className="flex flex-col items-stretch rounded border m-border p-4">
       <div className="lg:h-16 mb-4">
         {isLoading ? (
           <div className="flex items-center justify-center h-full">
-            <Loading className="fill-salmon" />
+            <Loading />
           </div>
         ) : (
           <div className="grid sm:grid-cols-auto-1fr gap-2 justify-center text-center sm:text-left items-center">
             <img
               src={response.user.avatar_url}
               alt={response.user.name}
-              className="rounded-full border-2 border-outline h-10 w-10 m-0 mx-auto"
+              className="rounded-full border-2 m-border h-10 w-10 m-0 mx-auto"
             />
             <div className="grid">
               <a
                 href={response.user.html_url}
                 target="_blank"
                 rel="noreferrer me"
-                className="m-0 p-0 text-white text-base sm:text-lg font-semibold"
+                className="m-0 p-0 sm:text-lg text-base font-semibold"
               >
                 {response.user.html_url.replace(/^https?:\/\//, '')}
               </a>
@@ -85,7 +85,7 @@ const RecentGitHubUserEvent = () => {
       <div className="flex items-center ml-1 mb-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="mr-2 h-5 w-5 fill-salmon"
+          className="mr-2 h-5 w-5 fill-fuchsia"
           viewBox="0 0 20 20"
           fill="currentColor"
         >
@@ -95,12 +95,12 @@ const RecentGitHubUserEvent = () => {
             clipRule="evenodd"
           />
         </svg>
-        <h2 className="m-0 text-base text-white">Recent Events</h2>
+        <h2 className="m-0 text-base">Recent Events</h2>
       </div>
-      <div className="rounded border border-outline bg-surface p-2 sm:p-4 bg-background h-96 overflow-y-hidden">
+      <div className="rounded border m-border p-2 sm:p-4 bg-background h-96 overflow-y-hidden">
         {isLoading ? (
           <div className="flex items-center justify-center h-full">
-            <Loading className="fill-salmon" />
+            <Loading />
           </div>
         ) : (
           <ul className="list-none m-0 p-0 overflow-y-auto overflow-x-hidden h-[355px]">
@@ -114,12 +114,12 @@ const RecentGitHubUserEvent = () => {
               } = event;
 
               return (
-                <li key={index} className="mt-0 rounded bg-surface p-3 leading-tight">
+                <li key={index} className="mt-0 rounded p-3 leading-tight">
                   <strong className="block">
-                    <span className={`inline-block bg-muted event-color-${type} rounded-full w-3 h-3 mr-2`} />
+                    <span className={`inline-block m-background event-color-${type} rounded-full w-3 h-3 mr-2`} />
                     Event: <small className="font-normal">{type}</small>
                   </strong>
-                  <small className="text-secondary">{formatDatestamp(created_at, true)}</small>
+                  <small>{formatDatestamp(created_at, true)}</small>
                   <div className="grid gap-1 my-4">
                     <strong className="grid grid-cols-auto-1fr gap-2 items-start">
                       <span>User: </span>
@@ -135,7 +135,7 @@ const RecentGitHubUserEvent = () => {
                       <div className="flex gap-2">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5 stroke-secondary"
+                          className="h-5 w-5 m-secondary-stroke"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -169,7 +169,7 @@ const RecentGitHubUserEvent = () => {
         )}
       </div>
       <div className="mt-4 leading-tight">
-        <small className="text-slate-400 text-xs">Powered by </small>
+        <small className="m-sub-text text-xs">Powered by </small>
         <a href="https://paulieapi.gatsbyjs.io/" target="_blank" rel="noreferrer" className="text-xs">
           Paulie API
         </a>

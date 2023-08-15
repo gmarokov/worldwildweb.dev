@@ -1,16 +1,13 @@
 import React, { Fragment } from 'react';
 import { graphql } from 'gatsby';
 
-import MdxParser from '../components/mdx-parser';
+import MdxParser from '../components/partials/mdx-parser';
 import AsideElement from '../components/aside/aside-element';
-import DateStamp from '../components/date-stamp';
+import DateStamp from '../components/partials/date-stamp';
 import FeaturedImageAside from '../components/aside/featured-image-aside';
-import AddReaction from '../components/add-reaction';
-import UtterancesObserver from '../components/utterances-observer';
-import Tag from '../components/tag';
-import Seo from '../components/seo';
+import Tag from '../components/partials/tag';
+import Seo from '../components/partials/seo';
 import TableOfContents from '../components/aside/table-of-contents';
-import WebmentionAside from '../components/aside/webmention-aside';
 
 const Page = ({
   data: {
@@ -34,7 +31,7 @@ const Page = ({
     <Fragment>
       <div className="grid lg:grid-cols-1fr-auto">
         <DateStamp date={dateModified ? dateModified : date} />
-        <small className="leading-6 font-semibold text-secondary">Author &bull; {author}</small>
+        <small className="leading-6 font-semibold m-sub-text">Author &bull; {author}</small>
       </div>
       <h1 className="my-12 text-3xl sm:text-5xl">{title}</h1>
       <ul className="list-none m-0 p-0 flex flex-wrap gap-2 mb-12">
@@ -49,17 +46,14 @@ const Page = ({
           : null}
       </ul>
       <MdxParser embedded={embeddedImages}>{body}</MdxParser>
-      <AddReaction title={title} slug={slug} />
-      <UtterancesObserver />
       <AsideElement>
         <FeaturedImageAside alt={title} thumbnail={thumbnail} shareText={`${title}\n ${siteUrl}${slug}`} />
         {toc ? (
           <div className="px-6">
-            <h5 className="mb-3 text-lg leading-6 font-semibold uppercase text-secondary">On this page</h5>
+            <h5 className="mb-3 text-lg leading-6 font-semibold uppercase">On this page</h5>
             <TableOfContents slug={slug} items={toc} />
           </div>
         ) : null}
-        <WebmentionAside target={`https://worldwildweb.dev${slug}`} />
       </AsideElement>
     </Fragment>
   );

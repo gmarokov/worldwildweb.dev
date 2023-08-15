@@ -35,8 +35,8 @@ const LatestProjects = () => {
 
   return (
     <section>
-      <h2 className="m-0 text-2xl uppercase text-salmon">Latest Projects</h2>
-      <p className="mt-0 mb-8 text-slate-300 text-base">Here's some bigger projects!</p>
+      <h2 className="m-0 text-2xl uppercase">Latest Projects</h2>
+      <p className="mt-0 mb-8 text-base m-sub-text">Here's some bigger projects!</p>
       <ul className="grid gap-8 list-none m-0 mb-8 p-0">
         {nodes.map((node, index) => {
           const {
@@ -61,8 +61,8 @@ const LatestProjects = () => {
           );
         })}
       </ul>
-      <div className="flex justify-center">
-        <Link to="/projects" className="flex gap-2 items-center no-underline">
+      <div className="flex">
+        <Link to="/projects" className="flex gap-2 py-1 px-3 rounded m-btn no-underline">
           More Projects{' '}
           <span role="img" aria-label="star">
             ⭐

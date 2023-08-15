@@ -19,9 +19,9 @@ const SidebarNav = ({ pathname }) => {
       {({ isNavOpen, handleNav }) => {
         return (
           <nav
-            className={`site-nav lg:block fixed z-30 inset-0 top-[3.8125rem] transition-all duration-300
-          ${isNavOpen ? 'left-[max(0px,calc(50%-45rem))]' : 'left-[-240px] lg:left-[max(0px,calc(50%-45rem))]'} 
-          right-auto w-[14.5rem] pb-10 px-6 overflow-y-auto border-r border-r-outline bg-background`}
+            className={`site-nav lg:block fixed z-30 inset-0 top-[4.8rem] transition-all duration-300
+            ${isNavOpen ? 'left-[max(0px,calc(50%-45rem))]' : 'left-[-240px] lg:left-[max(0px,calc(50%-45rem))]'} 
+            right-auto w-[14.5rem] pb-10 px-6 overflow-y-auto border-r m-border m-background`}
           >
             <div className="pt-10 pb-4">
               <SiteSearch nodes={allMdx} />
@@ -41,9 +41,9 @@ const SidebarNav = ({ pathname }) => {
                       <Link
                         onClick={handleNav}
                         to={slug}
-                        activeClassName={isIndex ? '' : '!text-primary'}
+                        activeClassName={isIndex ? '' : 'm-active-link'}
                         partiallyActive={true}
-                        className="main-navigation text-slate-300"
+                        className="m-navigation m-btn"
                       >
                         <NavigationIcon icon={icon} />
                         {title}
@@ -52,7 +52,7 @@ const SidebarNav = ({ pathname }) => {
                   );
                 })}
               </ul>
-              <hr className="border border-outline my-8" />
+              <hr className="border m-border my-8" />
               <ul>
                 {navigation.links.map((link, index) => {
                   const { url, title, icon, rel } = link;
@@ -64,7 +64,7 @@ const SidebarNav = ({ pathname }) => {
                         href={url}
                         target="_blank"
                         rel={`noreferrer ${rel}`}
-                        className="main-navigation text-slate-400"
+                        className="m-navigation m-btn"
                       >
                         <NavigationIcon icon={icon} />
                         {title}

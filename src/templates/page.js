@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { graphql } from 'gatsby';
 
-import MdxParser from '../components/mdx-parser';
+import MdxParser from '../components/partials/mdx-parser';
 import AsideElement from '../components/aside/aside-element';
-import Seo from '../components/seo';
+import Seo from '../components/partials/seo';
 import GenericAside from '../components/aside/generic-aside';
 
 const Page = ({
@@ -17,7 +17,7 @@ const Page = ({
 }) => {
   return (
     <Fragment>
-      <small className="mb-4 leading-6 font-semibold capitalize text-primary">{title}</small>
+      <small className="mb-4 leading-6 font-semibold capitalize m-sub-text">{title}</small>
       <MdxParser>{body}</MdxParser>
       <AsideElement>
         <GenericAside />
