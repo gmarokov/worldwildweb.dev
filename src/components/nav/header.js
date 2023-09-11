@@ -75,7 +75,7 @@ const Header = () => {
                 <div className="relative flex items-center">
                   <Link className="relative" to="/">
                     <span className="sr-only">Georgi Marokov's Site</span>
-                    <div className='m-svg-container w-11/12 lg:w-full'>
+                    <div className="m-svg-container w-11/12 lg:w-full">
                       <Logo isDark={isDark} />
                     </div>
                   </Link>
