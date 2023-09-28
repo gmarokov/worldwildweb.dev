@@ -65,8 +65,8 @@ const LatestProjects = () => {
         <Link to="/projects" className="flex gap-2 py-1 px-3 rounded m-btn no-underline">
           <span role="img" aria-label="star">
             ⭐
-          </span>
-          {' '} More Projects
+          </span>{' '}
+          More Projects
         </Link>
       </div>
     </section>

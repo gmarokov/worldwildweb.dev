@@ -36,9 +36,7 @@ const LatestBlogs = () => {
   return (
     <section>
       <h2 className="m-0 text-2xl uppercase">Tech Alchemist Chronicles</h2>
-      <p className="mt-0 mb-8 text-base m-sub-text">
-      Find the latest transforming blog ideas.
-      </p>
+      <p className="mt-0 mb-8 text-base m-sub-text">Find the latest transforming blog ideas.</p>
       <ul className="grid gap-8 list-none m-0 mb-8 p-0">
         {nodes.map((node, index) => {
           const {
@@ -67,8 +65,8 @@ const LatestBlogs = () => {
         <Link to="/blogs" className="flex gap-2 py-1 px-3 rounded m-btn no-underline">
           <span role="img" aria-label="pencil">
             ✏️
-          </span>
-          {' '} More blogs
+          </span>{' '}
+          More blogs
         </Link>
       </div>
     </section>

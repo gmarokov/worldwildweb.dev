@@ -65,8 +65,8 @@ const LatestHobbies = () => {
         <Link to="/hobbies" className="flex gap-2 py-1 px-3 rounded m-btn no-underline">
           <span role="img" aria-label="film projector">
             🚵🏻
-          </span>
-          {' '} More hobby posts
+          </span>{' '}
+          More hobby posts
         </Link>
       </div>
     </section>
