@@ -35,8 +35,8 @@ const LatestHobbies = () => {
 
   return (
     <section>
-      <h2 className="m-0 text-2xl uppercase">From Handlebars to Horizons</h2>
-      <p className="mt-0 mb-8 text-base m-sub-text">Find the latest gateway adventures.</p>
+      <h2 className="m-0 text-2xl">Trail tales</h2>
+      <p className="mt-0 mb-8 text-base m-sub-text">Where the trail never ends...</p>
       <ul className="grid gap-8 list-none m-0 mb-8 p-0">
         {nodes.map((node, index) => {
           const {
