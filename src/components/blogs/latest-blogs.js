@@ -35,7 +35,9 @@ const LatestBlogs = () => {
 
   return (
     <section>
-      <h2 className="m-0 text-2xl"><Link to='/blogs'>Blogosphere</Link></h2>
+      <h2 className="m-0 text-2xl">
+        <Link to="/blogs">Blogosphere</Link>
+      </h2>
       <p className="mt-0 mb-8 text-base m-sub-text">Find some of my latest tech insights and monologues.</p>
       <ul className="grid gap-8 list-none m-0 mb-8 p-0">
         {nodes.map((node, index) => {
