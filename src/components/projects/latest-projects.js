@@ -35,7 +35,7 @@ const LatestProjects = () => {
 
   return (
     <section>
-      <h2 className="m-0 text-2xl">Techcraft</h2>
+      <h2 className="m-0 text-2xl"><Link to='/projects'>Techcraft</Link></h2>
       <p className="mt-0 mb-8 text-base m-sub-text">Find some of the latest project journeys.</p>
       <ul className="grid gap-8 list-none m-0 mb-8 p-0">
         {nodes.map((node, index) => {

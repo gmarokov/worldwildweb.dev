@@ -24,7 +24,7 @@ const AllBlogs = () => {
           }
           featuredImage {
             childImageSharp {
-              thumbnail: gatsbyImageData(width: 180)
+              thumbnail: gatsbyImageData(width: 320)
             }
           }
         }
@@ -33,30 +33,32 @@ const AllBlogs = () => {
   `);
 
   return (
-    <ul className="mt-8 grid gap-8 list-none m-0 mb-8 p-0">
-      {nodes.map((node, index) => {
-        const {
-          fields: { slug },
-          excerpt,
-          frontmatter: { title, date, dateModified },
-          featuredImage: {
-            childImageSharp: { thumbnail }
-          }
-        } = node;
+    <section>
+      <ul className="mt-10 grid gap-8 list-none m-0 mb-8 p-0">
+        {nodes.map((node, index) => {
+          const {
+            fields: { slug },
+            excerpt,
+            frontmatter: { title, date, dateModified },
+            featuredImage: {
+              childImageSharp: { thumbnail }
+            }
+          } = node;
 
-        return (
-          <BlogCard
-            key={index}
-            link={slug}
-            title={title}
-            thumbnail={thumbnail}
-            date={date}
-            dateModified={dateModified}
-            excerpt={excerpt}
-          />
-        );
-      })}
-    </ul>
+          return (
+            <BlogCard
+              key={index}
+              link={slug}
+              title={title}
+              thumbnail={thumbnail}
+              date={date}
+              dateModified={dateModified}
+              excerpt={excerpt}
+            />
+          );
+        })}
+      </ul>
+    </section>
   );
 };
 

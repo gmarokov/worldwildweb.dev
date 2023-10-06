@@ -99,42 +99,42 @@ module.exports = {
             },
             h1: {
               color: theme('colors.gray.600'),
-              fontWieght: theme('font-bold'),
+              fontWeight: theme('font-bold'),
               a: {
                 color: theme('colors.sky.500')
               }
             },
             h2: {
               color: theme('colors.gray.600'),
-              fontWieght: theme('font-bold'),
+              fontWeight: theme('font-bold'),
               a: {
                 color: theme('colors.sky.500')
               }
             },
             h3: {
               color: theme('colors.gray.600'),
-              fontWieght: theme('font-bold'),
+              fontWeight: theme('font-bold'),
               a: {
                 color: theme('colors.sky.500')
               }
             },
             h4: {
               color: theme('colors.gray.600'),
-              fontWieght: theme('font-bold'),
+              fontWeight: theme('font-bold'),
               a: {
                 color: theme('colors.sky.500')
               }
             },
             h5: {
               color: theme('colors.gray.600'),
-              fontWieght: theme('font-bold'),
+              fontWeight: theme('font-bold'),
               a: {
                 color: theme('colors.sky.500')
               }
             },
             h6: {
               color: theme('colors.gray.600'),
-              fontWieght: theme('font-bold'),
+              fontWeight: theme('font-bold'),
               a: {
                 color: theme('colors.sky.500')
               }
@@ -144,7 +144,7 @@ module.exports = {
             },
             a: {
               color: theme('colors.sky.500'),
-              fontWieght: theme('font-bold'),
+              fontWeight: theme('font-bold'),
               '&:hover': {
                 color: theme('colors.gray.600'),
                 transition: 'all 0.2s ease'

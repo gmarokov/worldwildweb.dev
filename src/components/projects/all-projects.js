@@ -33,8 +33,8 @@ const AllProjects = () => {
   `);
 
   return (
-    <Fragment>
-      <ul className="mt-8 grid gap-8 list-none m-0 mb-8 p-0">
+    <section>
+      <ul className="mt-10 grid gap-8 list-none m-0 mb-8 p-0">
         {nodes.map((node, index) => {
           const {
             fields: { slug },
@@ -58,7 +58,7 @@ const AllProjects = () => {
           );
         })}
       </ul>
-    </Fragment>
+    </section>
   );
 };
 
