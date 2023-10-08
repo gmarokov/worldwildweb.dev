@@ -33,7 +33,7 @@ const Page = ({
         <DateStamp date={dateModified ? dateModified : date} />
         <small className="leading-6 font-semibold m-sub-text">Author &bull; {author}</small>
       </div>
-      <h1 className="my-12 text-3xl sm:text-5xl">{title}</h1>
+      <h1 className="my-12 m-page-heading">{title}</h1>
       <ul className="list-none m-0 p-0 flex flex-wrap gap-2 mb-12">
         {tags
           ? tags.map((tag, index) => {
