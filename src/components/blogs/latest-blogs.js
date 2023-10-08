@@ -25,7 +25,7 @@ const LatestBlogs = () => {
           }
           featuredImage {
             childImageSharp {
-              thumbnail: gatsbyImageData(width: 180)
+              thumbnail: gatsbyImageData(width: 320)
             }
           }
         }
@@ -35,10 +35,10 @@ const LatestBlogs = () => {
 
   return (
     <section>
-      <h2 className="m-0 text-2xl uppercase">Latest Blog posts</h2>
-      <p className="mt-0 mb-8 text-base m-sub-text">
-        Here's the latest posts I've written and published here on my site.
-      </p>
+      <h2 className="m-0 text-2xl">
+        <Link to="/blogs">Blogosphere</Link>
+      </h2>
+      <p className="mt-0 mb-8 text-base m-sub-text">Find some of my latest tech insights and monologues.</p>
       <ul className="grid gap-8 list-none m-0 mb-8 p-0">
         {nodes.map((node, index) => {
           const {
@@ -65,10 +65,10 @@ const LatestBlogs = () => {
       </ul>
       <div className="flex">
         <Link to="/blogs" className="flex gap-2 py-1 px-3 rounded m-btn no-underline">
-          More blogs{' '}
           <span role="img" aria-label="pencil">
             ✏️
-          </span>
+          </span>{' '}
+          More blogs
         </Link>
       </div>
     </section>

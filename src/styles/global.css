@@ -43,7 +43,7 @@
 }
 
 .m-sub-text {
-  @apply dark:text-slate-400 text-gray-400
+  @apply dark:text-zinc-400 text-stone-400
 }
 
 .m-active-link {
@@ -70,13 +70,24 @@
   @apply fill-cyan-500 dark:fill-sky-600
 }
 
-.m-content-item {
-  @apply dark:shadow-lg dark:shadow-white/5 shadow-lg dark:hover:shadow-white/5 hover:shadow-sky-700/20
+.m-page-heading {
+  @apply text-4xl sm:text-5xl font-bold;
 }
-
 
 .prose :where(h1, h2, h3, h4, h5):not(:where([class~='not-prose'] *)) a {
   @apply no-underline font-bold;
+}
+
+.prose :where(h1):not(:where([class~='not-prose'] *)):not(.m-page-heading) {
+  @apply text-3xl sm:text-4xl;
+}
+
+.prose :where(h2):not(:where([class~='not-prose'] *)):not(.m-page-heading) {
+  @apply text-2xl sm:text-3xl mt-0 mb-3;
+}
+
+.prose :where(h3):not(:where([class~='not-prose'] *)):not(.m-page-heading) {
+  @apply text-xl sm:text-2xl mt-0 mb-2;
 }
 
 .prose :where(blockquote):not(:where([class~='not-prose'] *)) {
@@ -85,6 +96,13 @@
 
 .prose :where(ol > li):not(:where([class~='not-prose'] *))::marker {
   @apply text-fuchsia-500 font-bold text-xl;
+}
+
+.prose a h3 { 
+  @apply text-sky-500 hover:text-gray-600 dark:text-fuchsia-500 dark:hover:text-slate-100;
+}
+.prose a time {
+  @apply text-gray-600 dark:text-slate-100;
 }
 
 

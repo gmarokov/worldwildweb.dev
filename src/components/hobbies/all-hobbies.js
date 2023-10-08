@@ -33,30 +33,32 @@ const AllHobbies = () => {
   `);
 
   return (
-    <ul className="mt-16 grid gap-8 list-none m-0 mb-8 p-0">
-      {nodes.map((node, index) => {
-        const {
-          fields: { slug },
-          excerpt,
-          frontmatter: { title, date, category },
-          logo: {
-            childImageSharp: { logo }
-          }
-        } = node;
+    <section>
+      <ul className="mt-10 grid gap-8 list-none m-0 mb-8 p-0">
+        {nodes.map((node, index) => {
+          const {
+            fields: { slug },
+            excerpt,
+            frontmatter: { title, date, category },
+            logo: {
+              childImageSharp: { logo }
+            }
+          } = node;
 
-        return (
-          <HobbyCard
-            key={index}
-            link={slug}
-            title={title}
-            logo={logo}
-            category={category}
-            date={date}
-            excerpt={excerpt}
-          />
-        );
-      })}
-    </ul>
+          return (
+            <HobbyCard
+              key={index}
+              link={slug}
+              title={title}
+              logo={logo}
+              category={category}
+              date={date}
+              excerpt={excerpt}
+            />
+          );
+        })}
+      </ul>
+    </section>
   );
 };
 

@@ -6,31 +6,31 @@ icon:
   011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z
 ---
 
-import RecentGitHubUserEvent from '../../src/components/partials/recent-github-user-events';
 import RecentTweets from '../../src/components/partials/recent-tweets';
 
 import LatestProjects from '../../src/components/projects/latest-projects';
 import LatestHobbies from '../../src/components/hobbies/latest-hobbies';
 import LatestBlogs from '../../src/components/blogs/latest-blogs';
+import RecentGitHubUserEvent from '../../src/components/partials/recent-github-user-events';
 
-<h1 className="!mb-0">Welcome, to (my) Georgi Marokov's website</h1>
+<h1 className="!mb-0 m-page-heading">Welcome, to Georgi Marokov's website</h1>
 
-**Software Engineer [@Modeshift](https://twitter.com/GoModeshift)**
+Hi there! 👋
 
-a father @home, a mountain bike lover @themountain
+I'm a dedicated software engineer with expertise in the .NET ecosystem, a strong sense in operations, and proficiency in
+selected front-end technologies.
 
-Hi 👋, I'm Georgi Marokov and I'm a full stack software engineer. I'm really into resolving complex issues, dive deep in
-to the problem and finding elegant solution.
+By day, I'm a problem solver, getting complex challenges to elegant solutions. When I'm not at the desk, you'll find me
+being with my family and friends, riding bikes, hiking peaks and taking pictures.
 
-I spend my free time with family and friends, riding bikes, hiking peaks and taking pictures.
-
-Wanna share some ideas? Don't hesitate and contact me!
+Let's connect and share ideas – don't hesitate and contact me!
 
 <hr className="border m-border my-8" />
 
-<div className="grid gap-32">
+<div className="grid">
   <LatestBlogs />
   <hr className="m-border my-8" />
-  <LatestHobbies />
   <LatestProjects />
+  <hr className="m-border my-8" />
+  <LatestHobbies />
 </div>
