@@ -74,6 +74,14 @@
   @apply text-4xl sm:text-5xl font-bold;
 }
 
+.m-grid-links a {
+  @apply gap-x-4 items-center rounded font-medium no-underline auto-cols-auto flex;
+}
+
+.m-grid-links a svg {
+  @apply w-6 h-5;
+}
+
 .prose :where(h1, h2, h3, h4, h5):not(:where([class~='not-prose'] *)) a {
   @apply no-underline font-bold;
 }
