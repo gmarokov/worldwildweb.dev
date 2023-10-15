@@ -124,7 +124,7 @@ Make sure to add them as Environment variables.
 
 Next step is to define the variables for the CI job:
 
-```csharp
+```
 variables:
   SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
   GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
@@ -133,7 +133,7 @@ variables:
 After that comes the stage definitions of the job. In this case we will have two - one for frontend and one for the
 backend:
 
-```csharp
+```
 stages:
   - frontend
   - backend
@@ -142,7 +142,7 @@ stages:
 Create the frontend's actual stage definition with the following task. You can have as many task for a stage as you like
 but we will stick to just one:
 
-```csharp
+```
 frontend.build.test.analyze:
   stage: frontend
   image:
@@ -182,7 +182,7 @@ The name of the job, its up to you to give it a descriptive name
 
 The name of the stage which this task belongs to. Must be predefined which we did above.
 
-```csharp
+```
 image: # We can use existing docker images
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: [""]
@@ -191,7 +191,7 @@ image: # We can use existing docker images
 Here we specify a Docker image which comes with sonar-scanner-cli preinstalled. This Scanner CLI is used for all
 languages except for Dotnet as I mentioned above.
 
-```csharp
+```
 cache:
     key: "${CI_JOB_NAME}"
     paths:
@@ -200,7 +200,7 @@ cache:
 
 We specify the cache and not download the image every time we run the job. This should be good.
 
-```csharp
+```
 script:
     - cd Frontend
     - npm install
@@ -212,7 +212,7 @@ Nothing fancy here, regular npm stuff but note that tests are run with coverage 
 in the `package.json` which converts test result data to Generic Test Data which is one of the supported formats by
 SonarCloud.
 
-```csharp
+```
  - sonar-scanner
     -Dsonar.projectKey=sonar.example.frontend
     -Dsonar.organization=gmarokov-1
@@ -243,7 +243,7 @@ provide it anyway.
 
 When it comes to the backend scan, it will be a little different since we will use the dedicated scanner for Dotnet.
 
-```csharp
+```
 backend.build.test.analyze:
   stage: backend
   image: gmarokov/sonar.dotnet:5.0
@@ -275,7 +275,7 @@ Again Docker image which will be used to spin a container on which we will execu
 Java runtime, SonarDotnet and Dotnet-Trx2Sonar global tools. The image can be found on
 [DockerHub](https://hub.docker.com/r/gmarokov/sonar.dotnet) which looks like this:
 
-```csharp
+```
 *# Image with Dotnet SDK, Java runtime,* SonarDotnet, Dotnet-Trx2Sonar *dotnet tools*
 FROM mcr.microsoft.com/dotnet/sdk:5.0-focal
 ENV PATH="$PATH:/root/.dotnet/tools"
@@ -320,7 +320,5 @@ If you haven't used any static code analysis tools before, now you don't have an
 # Resources
 
 [https://codeburst.io/code-coverage-in-net-core-projects-c3d6536fd7d7](https://codeburst.io/code-coverage-in-net-core-projects-c3d6536fd7d7)
-
 [https://community.sonarsource.com/t/coverage-test-data-generate-reports-for-c-vb-net/9871](https://community.sonarsource.com/t/coverage-test-data-generate-reports-for-c-vb-net/9871)
-
 [https://dotnetthoughts.net/static-code-analysis-of-netcore-projects/](https://dotnetthoughts.net/static-code-analysis-of-netcore-projects/)
