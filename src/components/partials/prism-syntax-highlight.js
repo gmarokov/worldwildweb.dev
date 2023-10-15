@@ -6,7 +6,7 @@ const PrismSyntaxHighlight = ({ children, className }) => {
   const language = className.replace(/language-/gm, '');
 
   return (
-    <Highlight {...defaultProps} code={children} language={language} theme={theme}>
+    <Highlight {...defaultProps} code={children} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <code className={className} style={style}>
           {tokens.slice(0, -1).map((line, i) => (
