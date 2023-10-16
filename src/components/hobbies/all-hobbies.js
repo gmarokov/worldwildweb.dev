@@ -9,7 +9,7 @@ const AllHobbies = () => {
   } = useStaticQuery(graphql`
     {
       allMdx(
-        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "hobby" } } }
+        filter: { frontmatter: { status: { ne: "draft" }, type: { eq: "hobbie" } } }
         sort: { frontmatter: { date: DESC } }
       ) {
         nodes {
