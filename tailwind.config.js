@@ -27,7 +27,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        surface: '#201d3b'
+        surface: '#232041'
       },
       keyframes: {
         bar: {
@@ -150,51 +150,51 @@ module.exports = {
             },
             h1: {
               color: theme('colors.slate.100'),
-              fontWieght: theme('font-bold'),
+              fontWeight: theme('font-bold'),
               a: {
-                color: theme('colors.fuchsia.500')
+                color: theme('colors.fuchsia.400')
               }
             },
             h2: {
               color: theme('colors.slate.100'),
-              fontWieght: theme('font-bold'),
+              fontWeight: theme('font-bold'),
               a: {
-                color: theme('colors.fuchsia.500')
+                color: theme('colors.fuchsia.400')
               }
             },
             h3: {
               color: theme('colors.slate.100'),
-              fontWieght: theme('font-bold'),
+              fontWeight: theme('font-bold'),
               a: {
-                color: theme('colors.fuchsia.500')
+                color: theme('colors.fuchsia.400')
               }
             },
             h4: {
               color: theme('colors.slate.100'),
-              fontWieght: theme('font-bold'),
+              fontWeight: theme('font-bold'),
               a: {
-                color: theme('colors.fuchsia.500')
+                color: theme('colors.fuchsia.400')
               }
             },
             h5: {
               color: theme('colors.slate.100'),
-              fontWieght: theme('font-bold'),
+              fontWeight: theme('font-bold'),
               a: {
-                color: theme('colors.fuchsia.500')
+                color: theme('colors.fuchsia.400')
               }
             },
             h6: {
               color: theme('colors.slate.500'),
-              fontWieght: theme('font-bold'),
+              fontWeight: theme('font-bold'),
               a: {
-                color: theme('colors.fuchsia.500')
+                color: theme('colors.fuchsia.400')
               }
             },
             strong: {
               color: theme('colors.slate.100')
             },
             a: {
-              color: theme('colors.fuchsia.500'),
+              color: theme('colors.fuchsia.400'),
               fontWieght: theme('font-bold'),
               '&:hover': {
                 color: theme('colors.slate.100'),
