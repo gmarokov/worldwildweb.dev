@@ -4,138 +4,114 @@ title: Static Code Analysis for your .NET projects
 tags: [Tools, Dotnet, SonarCloud, Static Code Analysis]
 date: 2021-05-01
 author: Georgi Marokov
-featuredImage: https://res.cloudinary.com/marokovdevapp/image/upload/v1678046777/Blogs/fav-vscode-extensions/extensions-popular_bl3ktt.png
-embeddedImages:
-  - https://res.cloudinary.com/marokovdevapp/image/upload/v1678046262/Blogs/station-on-linux/Screenshot-from-2018-10-16-10-01-24-1024x576_gsslmf.png
+featuredImage: https://res.cloudinary.com/marokovdevapp/image/upload/v1697569642/Blogs/static-code-analysis.webp
 ---
 
-# What is Static Code Analysis
+# Static Code Analysis: Building Quality Software
 
-Every developer wants to write predictive, maintainable and high quality software. Unfortunately that's not always the
-case because of our human nature - we do make mistakes. That's why we try to automate all the things related to software
-development lifecycle: testing, deploying, running applications.
+Every developer aims to create predictable, maintainable, and high-quality software. 
+But being human, we make mistakes. That's where automation comes in, from testing 
+and deploying to running applications.
 
-But what about the codebase? What do we do to enforce minimally complex and maintainable code, ensure proper code styles
-standards, prevent common pitfalls and violations, and predict what the code would do at runtime?
+But what about the codebase? How can we ensure minimal complexity, proper coding standards, 
+avoid common pitfalls, and predict code behavior?
 
-By applying RULES defined by your team, the platform or the programming language. And that's what Static Code Analysis
-is all about.
+The answer is to rely on rules set by your team, the platform, or the programming language. 
+This is the essence of Static Code Analysis.
 
-Static Code Analysis can be simple manual inspection such as code review or automated via some of the tools we will
-overview in this blog post.
+It can be a manual code review or automated using various tools, as we'll explore in this post.
 
-**Keep digging**
+## More about static code analysis
 
-_Eric Dietrich wrote very explanatory article about what exactly Static Analysis is here:_
+[Read Eric Dietrich's informative article on Static Analysis.](https://blog.ndepend.com/static-analysis-explanation-everyone/)
 
-[https://blog.ndepend.com/static-analysis-explanation-everyone/](https://blog.ndepend.com/static-analysis-explanation-everyone/)
+If you're curious about Dynamic Analysis, explore these articles:
+- [Dynamic Code Analysis Primer](https://securityboulevard.com/2021/02/dynamic-code-analysis-a-primer/)
+- [More on Dynamic Analysis](https://github.com/analysis-tools-dev/dynamic-analysis)
+- [Choosing Between Static and Dynamic Analysis](https://www.overops.com/blog/static-vs-dynamic-code-analysis-how-to-choose-between-them/)
 
-_If you are curious about Dynamic Analysis you can also check out these articles:_
+This post is Part 1 of the Static Analysis series. In the next post, we'll set up SonarCloud for an 
+ASP.NET Core + React SPA application in a continuous integration pipeline. 
+[Check it out here](/blogs/2021/06/analyze-aspnet-react-in-sonarcloud/).
 
-[https://securityboulevard.com/2021/02/dynamic-code-analysis-a-primer/](https://securityboulevard.com/2021/02/dynamic-code-analysis-a-primer/)
-
-[https://github.com/analysis-tools-dev/dynamic-analysis](https://github.com/analysis-tools-dev/dynamic-analysis)
-
-[https://www.overops.com/blog/static-vs-dynamic-code-analysis-how-to-choose-between-them/](https://www.overops.com/blog/static-vs-dynamic-code-analysis-how-to-choose-between-them/)
-
-This post is Part 1 from the Static Analysis series. In the next post we will setup SonarCloud for a ASP.NET Core +
-React SPA project in CI pipeline. Check it out
-[here](https://dev.to/gmarokov/analyze-asp-net-core-with-your-react-spa-in-sonarcloud-5goj).
-
-# Where to use Static Code Analysis
-
+# Where to Use Static Code Analysis
 I found plenty of NuGet packages, IDE extensions and external services available on the market. That was hard to digest
-and probably I might miss some very helpful tools. Would be great if you guys share your opinion or favorite tools for
-the job.
+and probably I might miss some very helpful tools. 
 
-## In development
+## During Development
 
-Using build-time code analysis in Visual Studio /Code (or other preferred tool), we enable developers to quickly
-understand what rules are being broken. This enables them to fix code earlier in the development lifecycle, and we can
-avoid builds that fail later.
+Using build-time code analysis in Visual Studio /Code (or other preferred tool), 
+we enable developers to quickly understand what rules are being broken. 
+This enables them to fix code earlier in the development lifecycle 
+preventing late-stage build failures.
 
-### Extensions for Visual Studio Code
+### For Visual Studio Code
 
-- OmniSharp - [https://github.com/OmniSharp/omnisharp-roslyn](https://github.com/OmniSharp/omnisharp-roslyn) A go-to
-  tool for C# development in VSC.
-- Roslynator - [https://github.com/JosefPihrt/Roslynator](https://github.com/JosefPihrt/Roslynator) A collection of 500+
-  analyzers, refactorings and fixes for C#, powered by Roslyn.
-- DevSkim - [https://github.com/microsoft/devskim](https://github.com/microsoft/devskim) DevSkim is a framework of IDE
-  extensions and language analyzers that provide inline security analysis in the dev environment as the developer writes
-  code.
-- SonarLint - [https://www.sonarlint.org/vscode](https://www.sonarlint.org/vscode) Even that this extension doesn't scan
-  your .NET projects it's still super useful for your frontend html, css, js, ts files.
-- Sonar Dotnet - [https://github.com/yagoluiz/sonar-dotnet-vscode/](https://github.com/yagoluiz/sonar-dotnet-vscode/)
-  Easy connect to SonarCloud from your development environment.
+Consider extensions like:
+- [Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
+- [OmniSharp](https://github.com/OmniSharp/omnisharp-roslyn) A go-to tool for C# development.
+- [Roslynator](https://github.com/JosefPihrt/Roslynator) Offers 500+ analyzers and fixes for C#.
+- [DevSkim](https://github.com/microsoft/devskim) Provides inline security analysis as you code.
+- [SonarLint](https://www.sonarsource.com/products/sonarlint/features/vs-code/) Useful for frontend (HTML, CSS, JS, TS) analysis.
+- [Sonar Dotnet](https://github.com/yagoluiz/sonar-dotnet-vscode/) Connect to SonarCloud from your development environment.
 
-### Extensions for Visual Studio
-
-- Roslynator - [https://github.com/JosefPihrt/Roslynator](https://github.com/JosefPihrt/Roslynator) Again the famous
+### For Visual Studio
+- [Roslynator](https://github.com/JosefPihrt/Roslynator) Again the famous
   Roslynator analyzers for Visual Studio.
-- ReSharper - [https://www.jetbrains.com/resharper/](https://www.jetbrains.com/resharper/) This is more than just
-  analysis tool. If you haven't heard of ReSharper, definitely should be checked out.
-- NDepend - [https://www.ndepend.com/](https://www.ndepend.com/) The "Swiss Army Knife" for .NET Developers, Architects
-  and Teams.
+- [SonarLint](https://www.sonarsource.com/products/sonarlint/features/visual-studio/) Useful for frontend (HTML, CSS, JS, TS) analysis.
+- [ReSharper](https://www.jetbrains.com/resharper/) Not just an analysis tool, but a comprehensive development tool.
+- [NDepend](https://www.ndepend.com/) A "Swiss Army Knife" for .NET Developers.
 
 ### Other tools
 
-- Rider - [https://www.jetbrains.com/rider/](https://www.jetbrains.com/rider/) Another great IDE for .NET developers
+- [Rider](https://www.jetbrains.com/rider/) Another great IDE for .NET developers
   which comes with the power of ReSharper.
 
-## In build pipelines
+## In Build Pipelines
 
-NuGet packaged analyzers are the easiest, and they will automatically run as your project builds on the build agents.
+Use NuGet packaged analyzers to automatically run as your project builds in CI.
 When a build encounters a code quality error, you can immediately fail the build, send alerts, or apply any other
-actions you and your team needs.
+actions.
 
-.NET Core SDK 3.0 or later, comes with included analyzers for Open APIs previously known as Swagger. To enable the
-analyzer in your project, include the IncludeOpenAPIAnalyzers property in the project file:
+*.NET Core SDK 3.0 or later includes analyzers for Open APIs (previously Swagger). 
+Enable the analyzer by setting `IncludeOpenAPIAnalyzers` to `true` in your project file.*
 
-```csharp
-<PropertyGroup>
-	<IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
-</PropertyGroup>
-```
+### NuGet packages to consider
 
-### NuGet packages
+- [Microsoft Code Quality Rules](https://www.nuget.org/packages/Microsoft.CodeAnalysis.NetAnalyzers/)
+- [CSharp Analyzers for ASP.NET Core MVC](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Api.Analyzers)
+- [Roslynator Analyzers](https://www.nuget.org/packages/Roslynator.Analyzers)
+- [SonarCloud Analyzers](https://www.nuget.org/packages/SonarAnalyzer.CSharp/)
+- [Async/Await Misuse Checker](https://www.nuget.org/packages/AsyncFixer)
+- [StyleCop's Rules via Roslyn](https://www.nuget.org/packages/StyleCop.Analyzers/)
 
-- Microsoft recommended code quality rules and .NET API usage rules -
-  [https://www.nuget.org/packages/Microsoft.CodeAnalysis.NetAnalyzers/](https://www.nuget.org/packages/Microsoft.CodeAnalysis.NetAnalyzers/)
-- Microsoft's CSharp analyzers for ASP.NET Core MVC -
-  [https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Api.Analyzers](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Api.Analyzers)
-- Roslynator analyzers as NuGet package -
-  [https://www.nuget.org/packages/Roslynator.Analyzers](https://www.nuget.org/packages/Roslynator.Analyzers)
-- SonarCloud analyzers -
-  [https://www.nuget.org/packages/SonarAnalyzer.CSharp/](https://www.nuget.org/packages/SonarAnalyzer.CSharp/)
-- Check for Async/await misuses - [https://www.nuget.org/packages/AsyncFixer](https://www.nuget.org/packages/AsyncFixer)
-- An implementation of StyleCop's rules using Roslyn -
-  [https://www.nuget.org/packages/StyleCop.Analyzers/](https://www.nuget.org/packages/StyleCop.Analyzers/)
+### Security analysis
 
-**Security analyzers**
+- [SecurityCodeScan for .NET](https://www.nuget.org/packages/SecurityCodeScan.VS2019/)
+- [DevSkim for inline security analysis](https://www.nuget.org/packages/Microsoft.CST.DevSkim/)
 
-- Security static code analyzer for .NET -
-  [https://www.nuget.org/packages/SecurityCodeScan.VS2019/](https://www.nuget.org/packages/SecurityCodeScan.VS2019/)
-- DevSkim is a framework and language analyzer that provides inline security analysis -
-  [https://www.nuget.org/packages/Microsoft.CST.DevSkim/](https://www.nuget.org/packages/Microsoft.CST.DevSkim/)
+### By SCM platform
+Different CI platforms may provide their own tool for security analysis:
 
-Different CI tools may provide their own tool for security analysis:
-
-- Only Azure DevOps -
+- Only Azure DevOps 
   [https://secdevtools.azurewebsites.net/helpcredscan.html](https://secdevtools.azurewebsites.net/helpcredscan.html)
-- Only GitLab -
+- Only GitLab 
   [https://docs.gitlab.com/ee/user/application_security/sast/index.html](https://docs.gitlab.com/ee/user/application_security/sast/index.html)
-- GitHub - https://github.com/marketplace?category=code-quality&type=apps Last but not least. GitHub's community driven
-  marketplace provides so many tools for code quality, security and everything else you can think of.
+- GitHub 
+  [GitHub Marketplace](https://github.com/marketplace?category=code-quality&type=apps) 
+  Last but not least. GitHub's community driven marketplace provides so many tools for code quality, 
+  security analysis. Choose your weapon.
 
-**NuGet packages for the Test projects**
+### NuGet packages for tests
 
-- Provides diagnostic analyzers to warn about incorrect usage of NSubstitute in C# -
+- Provides diagnostic analyzers to warn about incorrect usage of NSubstitute in C# 
   [https://www.nuget.org/packages/NSubstitute.Analyzers.CSharp](https://www.nuget.org/packages/NSubstitute.Analyzers.CSharp)
-- Code Analyzers for projects using xUnit.net -
+- Code Analyzers for projects using xUnit.net
   [https://www.nuget.org/packages/xunit.analyzers](https://www.nuget.org/packages/xunit.analyzers)
 
-### External services
+## External Services
 
+Consider these external services for static code analysis:
 - SonarCloud - [https://sonarcloud.io/](https://sonarcloud.io/) My go-to tool for .NET projects. They even have a
   separate scanner for .NET. Pretty nice integration with Azure DevOps. Free for public projects.
 - Embold - [https://embold.io/](https://embold.io/) Fairly new tool with Free plan for 1M executable-lines-of-code for
@@ -148,32 +124,29 @@ Different CI tools may provide their own tool for security analysis:
   repositories.
 - Codacy - [https://www.codacy.com/](https://www.codacy.com/pricing) Paid service.
 
-And many more counting. These are the one I found easy to get started without installing and configuring additional
+..and many more counting. These are the one I found easy to get started without installing and configuring additional
 software.
 
-# Conclusion
+# In Conclusion
 
-In first issues raised by static code analysis might be considered as overhead, but static code analysis brings huge
-benefits in long term which can be summarized to but not only:
+Static code analysis may seem like overhead initially, but it offers long-term benefits:
+- Confidence to release more frequently
+- Quicker Time to Market (TTM)
+- Reduced business risks (data loss, vulnerabilities, application failures)
 
-- You have the confidence to release more frequently.
-- This results in having a quicker TTM (Time to Market).
-- Reduce business risks (data loss, vulnerabilities, application failures, ..)
+Rules may sometimes slow down your development, but it's up to you and your team to configure them for your needs.    
+Stay tuned for the next post where we'll configure SonarCloud for ASP.NET Core + React SPA.    
+What are your favorite static code analysis tools? Share your thoughts!
 
-Rules may sometimes get on your way and slow down your development, but you and your team are in charge to establish
-given rules or completely ignore/disable them.
+Happy analyzing!
 
-In the next post I will configure SonarCloud for ASP.NET Core + React SPA so stay tuned.
+# More resources
+- [Seven Reasons Why Roslyn-Based Code Analyzers Are Awesome](https://blog.tdwright.co.uk/2018/12/10/seven-reasons-that-roslyn-based-code-analysers-are-awesome/?preview=true)
+- [Microsoft's Visual Studio Code Quality Documentation](https://docs.microsoft.com/en-us/visualstudio/code-quality/?view=vs-2019)
+- [Analysis Tools Development: Static Analysis](https://github.com/analysis-tools-dev/static-analysis)
 
-Which are your favorite static code analysis tools? Please share your thoughts in the comments or
-[create a PR in GitHub](https://github.com/gmarokov/worldwildweb-dev-blogs/blob/master/blog-posts/static-code-analysis-for-your-dotnet-projects/static-code-analysis-for-your-dotnet-projects.md).
+------------------------
 
-Happy analyzing :)
 
-## Resources
 
-[https://blog.tdwright.co.uk/2018/12/10/seven-reasons-that-roslyn-based-code-analysers-are-awesome/?preview=true](https://blog.tdwright.co.uk/2018/12/10/seven-reasons-that-roslyn-based-code-analysers-are-awesome/?preview=true)
 
-[https://docs.microsoft.com/en-us/visualstudio/code-quality/?view=vs-2019](https://docs.microsoft.com/en-us/visualstudio/code-quality/?view=vs-2019)
-
-[https://github.com/analysis-tools-dev/static-analysis](https://github.com/analysis-tools-dev/static-analysis)
