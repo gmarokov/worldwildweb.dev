@@ -8,11 +8,13 @@ featuredImage: https://res.cloudinary.com/marokovdevapp/image/upload/v1697570577
 ---
 
 # Intro
+
 [SonarCloud](https://sonarcloud.io/) is a well-known cloud based tool for static code analysis that supports most of the
 popular programming languages - JavaScript, TypeScript, Python, C#, Java and more. The tool is also known as
 [SonarQube](https://www.sonarqube.org/) which is the self hosted version of the analyzer. SonarCloud is completely free
 for public repositories and SonarQube is even open sourced. These features make it my go-to tool for static code
-analysis and in this post I'll try to show you how to use with by building a demo project with ASP.NET Core and React single page application.
+analysis and in this post I'll try to show you how to use with by building a demo project with ASP.NET Core and React
+single page application.
 
 This post is the second part from the series for static code analysis for .NET applications. In the previous post we
 explored what static code analysis is and introduced some well-known tools for the job. If you missed
@@ -24,55 +26,55 @@ In this post you will find:
 - Available options for analyzing your ASP.NET Core SPA app.
 - Build a pipeline in GitLab.
 
-I will use React for the demo, but you can use any framework you prefer. Whether it's React, Angular, 
-Vue, or another, the process remains the same, with only variations in build or test commands.
+I will use React for the demo, but you can use any framework you prefer. Whether it's React, Angular, Vue, or another,
+the process remains the same, with only variations in build or test commands.
 
 Shall we begin? Let's dive in!
 
 # Different source control management platforms
 
-SonarCloud supports popular source control management (SCM) platforms such as GitHub, GitLab, Bitbucket, 
-and Azure DevOps. While the platforms differ, they share the commonality of declarative YAML pipeline execution.
+SonarCloud supports popular source control management (SCM) platforms such as GitHub, GitLab, Bitbucket, and Azure
+DevOps. While the platforms differ, they share the commonality of declarative YAML pipeline execution.
 
-It's essential to note that SonarCloud provides two scanners: one for .NET projects and one for everything else. 
-The good news is that the dedicated .NET scanner can also analyze files from your frontend app, including JavaScript, 
+It's essential to note that SonarCloud provides two scanners: one for .NET projects and one for everything else. The
+good news is that the dedicated .NET scanner can also analyze files from your frontend app, including JavaScript,
 TypeScript, CSS, and HTML files.
 
 Let's briefly explore the platforms and focus on setting up SonarCloud in GitLab from scratch.
 
 ## GitHub
 
-If you use GitHub, you're likely already familiar with GitHub Actions, which makes the setup relatively straightforward. 
-SonarCloud generates the pipeline setup for you. However, if you prefer to use other CI tools like Circle CI or Travis CI,
-you'll need to set up the `dotnet-sonarscanner` yourself. Keep an eye on the [Build pipeline in GitLab](#build-pipeline-in-gitlab) section, 
-as it provides a relevant scenario.
+If you use GitHub, you're likely already familiar with GitHub Actions, which makes the setup relatively straightforward.
+SonarCloud generates the pipeline setup for you. However, if you prefer to use other CI tools like Circle CI or Travis
+CI, you'll need to set up the `dotnet-sonarscanner` yourself. Keep an eye on the
+[Build pipeline in GitLab](#build-pipeline-in-gitlab) section, as it provides a relevant scenario.
 
 ## BitBucket
 
-BitBucket doesn't yet support apps targeting .NET Framework directly, but you can use containers for this purpose. 
-SonarCloud doesn't offer ready-to-use templates for .NET Core projects on BitBucket, so you'll need to install and 
+BitBucket doesn't yet support apps targeting .NET Framework directly, but you can use containers for this purpose.
+SonarCloud doesn't offer ready-to-use templates for .NET Core projects on BitBucket, so you'll need to install and
 configure everything manually.
 
 ## Azure DevOps
 
-Azure DevOps is well-integrated with SonarCloud, and the setup is straightforward. First, install the SonarCloud 
-extension from the Visual Studio Marketplace. Then, follow the comprehensive guide, which mainly involves using 
-the GUI builder for configuration.
+Azure DevOps is well-integrated with SonarCloud, and the setup is straightforward. First, install the SonarCloud
+extension from the Visual Studio Marketplace. Then, follow the comprehensive guide, which mainly involves using the GUI
+builder for configuration.
 
 ## GitLab
 
-Setting up SonarCloud in GitLab is quite similar to the BitBucket setup. We'll cover a full setup for GitLab later 
-in this post.
+Setting up SonarCloud in GitLab is quite similar to the BitBucket setup. We'll cover a full setup for GitLab later in
+this post.
 
 ## Local (Manually)
 
 You have two options for local setups:
 
-- **VSCode** Extension: Use the Sonar Dotnet extension in VSCode, which allows you to analyze code directly from the editor. 
-The setup is GUI-based, and the reports are pushed to SonarCloud.
-- **CLI**: To use the CLI, you'll need the .NET SDK, Java, and the scanner installed. Run the commands from the CI setup 
-directly in the terminal. Refer to the [official docs](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-msbuild/) 
-for requirements.
+- **VSCode** Extension: Use the Sonar Dotnet extension in VSCode, which allows you to analyze code directly from the
+  editor. The setup is GUI-based, and the reports are pushed to SonarCloud.
+- **CLI**: To use the CLI, you'll need the .NET SDK, Java, and the scanner installed. Run the commands from the CI setup
+  directly in the terminal. Refer to the
+  [official docs](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-msbuild/) for requirements.
 
 # Available options for analysis
 
@@ -80,8 +82,8 @@ When analyzing a combined single-page application, you have two options:
 
 ## Option 1: Analyze frontend and backend together
 
-The dedicated .NET scanner can scan JS, TS, HTML, CSS, and other frontend files. To include frontend files, 
-add them to your .csproj using a wildcard, as shown below:
+The dedicated .NET scanner can scan JS, TS, HTML, CSS, and other frontend files. To include frontend files, add them to
+your .csproj using a wildcard, as shown below:
 
 ```
 <ItemGroup>
@@ -92,28 +94,29 @@ add them to your .csproj using a wildcard, as shown below:
 </ItemGroup>
 ```
 
-If you're using .NET Core 3.1 or above, the default template includes frontend files in your ASP.NET Core project 
-in a standard way.
+If you're using .NET Core 3.1 or above, the default template includes frontend files in your ASP.NET Core project in a
+standard way.
 
 ## Option 2: Analyze frontend and backend separately
 
-This option is suitable for monorepos containing both frontend and backend. When separate teams handle frontend and backend, 
-this option creates two separate projects in SonarCloud. For the frontend, use the default SonarCloud analyzer.
+This option is suitable for monorepos containing both frontend and backend. When separate teams handle frontend and
+backend, this option creates two separate projects in SonarCloud. For the frontend, use the default SonarCloud analyzer.
 
 # Build pipeline in GitLab
 
-Let's summarize what we've discussed so far and put it into action. I'll guide you through the entire setup for 
-running SonarCloud analysis, using an example project with ASP.NET Core and React SPA. 
-We'll set up separate scan tasks for frontend and backend.
+Let's summarize what we've discussed so far and put it into action. I'll guide you through the entire setup for running
+SonarCloud analysis, using an example project with ASP.NET Core and React SPA. We'll set up separate scan tasks for
+frontend and backend.
 
-Before we begin, create an empty `.gitlab-ci.yml` file in the project's root directory. 
-You can refer to [the official GitLab CI documentation here](https://docs.gitlab.com/ee/ci/yaml/gitlab_ci_yaml.html) for details on the `.gitlab-ci.yml` file.
+Before we begin, create an empty `.gitlab-ci.yml` file in the project's root directory. You can refer to
+[the official GitLab CI documentation here](https://docs.gitlab.com/ee/ci/yaml/gitlab_ci_yaml.html) for details on the
+`.gitlab-ci.yml` file.
 
 ## Frontend
 
-We'll start by creating our frontend SonarCloud project manually. Provide a descriptive name and project key, and 
-you're ready to go. Once setup is completed, SonarCloud will provide the **SONAR_TOKEN** and **SONAR_HOST_URL**. 
-Make sure to add them as environment variables to GitLab CI.
+We'll start by creating our frontend SonarCloud project manually. Provide a descriptive name and project key, and you're
+ready to go. Once setup is completed, SonarCloud will provide the **SONAR_TOKEN** and **SONAR_HOST_URL**. Make sure to
+add them as environment variables to GitLab CI.
 
 Next, define variables for the CI job in `gitlab-ci.yml` file:
 
@@ -131,8 +134,8 @@ stages:
   - backend
 ```
 
-Next, create the frontend's actual stage definition with the following task. You can add more tasks to a stage if needed,
-but for this example, we'll stick to just one:
+Next, create the frontend's actual stage definition with the following task. You can add more tasks to a stage if
+needed, but for this example, we'll stick to just one:
 
 ```
 frontend.build.test.analyze:
@@ -166,25 +169,25 @@ frontend.build.test.analyze:
 
 This task involves several steps:
 
-`frontend.build.test.analyze`: This is the name of the job.   
-`stage: frontend`: Specifies the stage to which this task belongs. We defined this stage earlier.   
-`image`: We use a Docker image with `sonar-scanner-cli` pre-installed for the job.   
-`cache`: We specify a cache to avoid downloading the image every time we run the job.   
-`script`: The script contains the steps to prepare and analyze the frontend code. It installs dependencies, 
-builds, tests, and runs the SonarScanner. Note that tests are run with coverage report and special `jest-sonar-reporter`
-in the `package.json` which converts test result data to Generic Test Data which is one of the supported formats by
-SonarCloud.    
-Make sure to replace the Sonar parameters (-D) with your project-specific details.   
+`frontend.build.test.analyze`: This is the name of the job.  
+`stage: frontend`: Specifies the stage to which this task belongs. We defined this stage earlier.  
+`image`: We use a Docker image with `sonar-scanner-cli` pre-installed for the job.  
+`cache`: We specify a cache to avoid downloading the image every time we run the job.  
+`script`: The script contains the steps to prepare and analyze the frontend code. It installs dependencies, builds,
+tests, and runs the SonarScanner. Note that tests are run with coverage report and special `jest-sonar-reporter` in the
+`package.json` which converts test result data to Generic Test Data which is one of the supported formats by
+SonarCloud.  
+Make sure to replace the Sonar parameters (-D) with your project-specific details.  
 More about the parameters can be found here:
-[https://docs.sonarqube.org/latest/analysis/analysis-parameters/](https://docs.sonarqube.org/latest/analysis/analysis-parameters/)   
+[https://docs.sonarqube.org/latest/analysis/analysis-parameters/](https://docs.sonarqube.org/latest/analysis/analysis-parameters/)  
 `only`: This job runs on merge requests, the main branch, and tags.
 
 With this setup, the frontend analysis is ready to go. Now, let's move on to the backend.
 
 ## Backend
 
-To set up the backend scan, you'll need to create another project manually in SonarCloud. Since we already have 
-an environment variable with the name **SONAR_TOKEN**, you can save the token for this project as **SONAR_TOKEN_BACKEND**, 
+To set up the backend scan, you'll need to create another project manually in SonarCloud. Since we already have an
+environment variable with the name **SONAR_TOKEN**, you can save the token for this project as **SONAR_TOKEN_BACKEND**,
 for example. We'll manually provide this token in the GitLab CI job.
 
 The backend scan task is a bit different, as we'll use the dedicated .NET scanner. Here's the task for the backend:
@@ -215,10 +218,9 @@ backend.build.test.analyze:
 
 Let's break down this task:
 
-`image: gmarokov/sonar.dotnet:5.0`
-We use the gmarokov/sonar.dotnet:5.0 Docker image, which contains the .NET SDK, Java runtime, SonarDotnet, 
-and Dotnet-Trx2Sonar global tools.
- 
+`image: gmarokov/sonar.dotnet:5.0` We use the gmarokov/sonar.dotnet:5.0 Docker image, which contains the .NET SDK, Java
+runtime, SonarDotnet, and Dotnet-Trx2Sonar global tools.
+
 The image can be found on [DockerHub](https://hub.docker.com/r/gmarokov/sonar.dotnet) which looks like this:
 
 ```
@@ -237,34 +239,35 @@ RUN dotnet tool install --global dotnet-sonarscanner
 RUN dotnet tool install --global dotnet-trx2sonar
 ```
 
-After we have our Docker image pulled, the script section performs several tasks, including setting up the 
-SonarScanner for .NET projects, building the backend solution, running tests, and converting test results 
-to a format compatible with SonarCloud. Make sure to replace the SonarCloud parameters (/d) with your project-specific details.
+After we have our Docker image pulled, the script section performs several tasks, including setting up the SonarScanner
+for .NET projects, building the backend solution, running tests, and converting test results to a format compatible with
+SonarCloud. Make sure to replace the SonarCloud parameters (/d) with your project-specific details.
 
 Something to note is the following suspicious parameter:
 `/p:ExcludeByFile="**/Migrations/*.cs%2CTemplates/**/*.cshtml%2Ccwwwroot/%2C**/*.resx"`
 
 The reason we use encoded values here is the PowerShell parser which fails to parse the comma as separator.
 
-On another side note is the `dotnet-trx2sonar` tool which will help us to convert **.trx** files (Visual Studio Test Results File) generated by XUnit to
-Generic Test Data which is the expected format by SonarCloud. This will give us the ability to browse the tests in
-SonarCloud UI. More on the tool can be find on [GitHub here](https://github.com/gmarokov/dotnet-trx2sonar). 
+On another side note is the `dotnet-trx2sonar` tool which will help us to convert **.trx** files (Visual Studio Test
+Results File) generated by XUnit to Generic Test Data which is the expected format by SonarCloud. This will give us the
+ability to browse the tests in SonarCloud UI. More on the tool can be find on
+[GitHub here](https://github.com/gmarokov/dotnet-trx2sonar).
 
-With this setup, our pipeline is ready to run SonarCloud analysis during every CI build. You can also add badges to 
+With this setup, our pipeline is ready to run SonarCloud analysis during every CI build. You can also add badges to
 indicate the SonarCloud analysis status directly in your GitLab repository.
-
-[You can find the full demo project on GitLab here.](https://gitlab.com/gmarokov/sonar-aspnet-react-example).
+[You can find the full demo project on GitLab here.](https://gitlab.com/gmarokov/sonar-aspnet-react-example)
 
 # Conclusion
 
-The benefits of static code analysis are significant, and the setup can be straightforward. 
-While fast delivery is essential, static code analysis enhances it by making your delivery process more predictable,
-secure, and stable. It helps catch common pitfalls and violations early in the development process, whether developers 
-are writing code or committing changes.
+The benefits of static code analysis are significant, and the setup can be straightforward. While fast delivery is
+essential, static code analysis enhances it by making your delivery process more predictable, secure, and stable. It
+helps catch common pitfalls and violations early in the development process, whether developers are writing code or
+committing changes.
 
 If you haven't used static code analysis tools before, you now have no excuses not to start.
 
 # Resources
+
 [https://codeburst.io/code-coverage-in-net-core-projects-c3d6536fd7d7](https://codeburst.io/code-coverage-in-net-core-projects-c3d6536fd7d7)
 [https://community.sonarsource.com/t/coverage-test-data-generate-reports-for-c-vb-net/9871](https://community.sonarsource.com/t/coverage-test-data-generate-reports-for-c-vb-net/9871)
 [https://dotnetthoughts.net/static-code-analysis-of-netcore-projects/](https://dotnetthoughts.net/static-code-analysis-of-netcore-projects/)
