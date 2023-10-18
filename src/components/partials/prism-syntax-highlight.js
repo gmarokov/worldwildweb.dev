@@ -1,6 +1,5 @@
 import React from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
-import theme from 'prism-react-renderer/themes/dracula';
 
 const PrismSyntaxHighlight = ({ children, className }) => {
   const language = className.replace(/language-/gm, '');

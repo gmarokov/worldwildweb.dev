@@ -103,7 +103,7 @@
 }
 
 .prose :where(ol > li):not(:where([class~='not-prose'] *))::marker {
-  @apply text-fuchsia-400 font-bold text-xl;
+  @apply dark:text-fuchsia-400 text-sky-500 font-bold text-xl;
 }
 
 .prose a h3 { 
