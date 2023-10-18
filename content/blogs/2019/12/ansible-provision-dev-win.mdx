@@ -1,71 +1,104 @@
 ---
 type: blog
-title: Configure your dev Windows machine with Ansible
+title: Configure development Windows machine with Ansible
 tags: [Ansible, Windows]
-date: 2018-09-13
+date: 2019-12-13
 author: Georgi Marokov
-featuredImage: https://res.cloudinary.com/marokovdevapp/image/upload/v1678046777/Blogs/fav-vscode-extensions/extensions-popular_bl3ktt.png
-embeddedImages:
-  - https://res.cloudinary.com/marokovdevapp/image/upload/v1678046262/Blogs/station-on-linux/Screenshot-from-2018-10-16-10-01-24-1024x576_gsslmf.png
+featuredImage: https://res.cloudinary.com/marokovdevapp/image/upload/v1697661520/Blogs/ansible-local-dev_yhhdh5.png
 ---
 
-Ansible is well known it the IT operations fields with its fantastic automation abilities. You can do whatever you want
-with Windows too if it's a Powershell, bat script or one of the more than the hundreds modules. I will use it to
-configure my personal machine and save the hustle every time I step on new one. It's not a big deal to install a few
-programs but I'm sure this will repay in the long term. Can be pretty useful for configuring multiple machines too.
-Using Ansible to target localhost on Linux is like click-click-go, but It's different when it's comes to Windows. We
-need to install WSL on Windows, Ansible on WSL, Enable WinRm on Windows and finally control it from WSL. And all this
-happens on your localhost.
+import Poll from '../../../../src/components/partials/poll';
+
+
+# Why Ansible for local machine
+
+I'm not sure if the majority of developers like setting up their own development machines or find this process cumbersome.
+Take the quick poll to find out!
+
+<Poll></Poll>
+
+Being coding buddy to new starter colleagues, we have spent plenty of time trying to install multiple software tools and SDKs.
+This is common sense, right? So why not automate it? 
+All your company`s development software pre-install and ready to be used. Out of the box.
+I'd like to share my experience attempting to automate this process. It might be useful for someone trying to do something 
+crazy similar.
+
+Using Ansible to target localhost on Linux is like click-click-go, but it's a bit different when it's comes to Windows. We
+need to install WSL on Windows, Ansible on WSL, Enable WinRM on Windows and finally control it from WSL.
 
 # Install Ansible on WSL
 
-From within PowerShell run the following commands. Enable WSL:
-`Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
+To start, let's the following commands from within PowerShell:
 
-Install Ubuntu distribution but you may choose to install whatever distro you want:
-`Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1604 -OutFile Ubuntu.appx -UseBasicParsing`
+1. **Enable WSL**: This command activates the Windows Subsystem for Linux.
 
-Start your WSL and update packages: `sudo apt-get update`
+  ```
+  Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+  ```
 
-Install Ansible:
+2. **Install Ubuntu**: Choose your desired Linux distribution and install it. 
+Here, I've used a command to install the Ubuntu distribution, but you're free to select another from list of supported systems.
+   
+   ```
+   Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1604 -OutFile Ubuntu.appx -UseBasicParsing
+   ```
+
+3. **Update Packages**: Once you're inside your WSL, make sure to update the package list.
+   
+   ```
+   sudo apt-get update
+   ```
+
+4. **Install Ansible**: Proceed to install Ansible on your WSL, setting up the necessary components.
+
+   ```
+    sudo apt install software-properties-common
+    sudo apt-add-repository ppa:ansible/ansible
+    sudo apt update
+    sudo apt install ansible
+   ```
+
+5. **Install Packages for WinRM Support**: This step equips your system with packages that are essential for WinRM support.
+
+   ```
+   sudo apt install python-pip
+   sudo pip install pywinrm
+   sudo pip install xmltodict
+   ```
+
+# Enabling WinRM
+
+By default, WinRM functions only for Private or Domain networks. Although you have the option to skip 
+network profile checks by providing the `-SkipNetworkProfileCheck` parameter to `Enable-PSRemoting`, 
+I wouldn't recommend it. 
+A safer approach is to designate your trusted network as private and then proceed to enable WinRM 
+using PowerShell with the following command:
 
 ```
-sudo apt install software-properties-common
-sudo apt-add-repository ppa:ansible/ansible
-sudo apt update
-sudo apt install ansible
+Enable-PSRemoting
 ```
 
-Install packages for WinRM support:
+Make sure to enable Basic Authentication and unencrypted connections using the following commands:
 
 ```
-sudo apt install python-pip
-sudo pip install pywinrm
-sudo pip install xmltodict
+Set-Item -Path WSMan:\localhost\Service\Auth\Basic -Value $true
+Set-Item -Path WSMan:\localhost\Service\AllowUnencrypted -Value $true
 ```
 
-# Enable WinRM
+# Running the Playbook
 
-By default WinRM works only for Private or Domain networks. You can skip that by providing parameter to
-`Enable-PSRemoting -SkipNetworkProfileCheck` but I don't suggest doing that. Instead make your trusted network private.
-Then enable WinRM: `Enable-PSRemoting` running it in Powershell.
+With your environment configured, you can now use `ansible-pull` to run the playbook.
+The linked playbook installs Chocolatey and a selection of packages from it. Detailed list is available 
+in the [repository](https://github.com/gmarokov/ansible-win-postinstall). Feel free to modify it to your needs. 
+Provide your Windows machine's username and password to initiate the process.
 
-Enable Basic Auth: `Set-Item -Path WSMan:\localhost\Service\Auth\Basic -Value $true`
-
-Enable Unencrypted connection: `Set-Item -Path WSMan:\localhost\Service\AllowUnencrypted -Value $true`
-
-# Run the playbook
-
-Using `ansible-pull` run the playbook which install Chocolatey and a few packages from it. Full details can found in the
-[repo](https://github.com/gmarokov/ansible-win-postinstall). Provide your username and password for your Windows
-machine.
-
-`ansible-pull –U https://github.com/gmarokov/ansible-win-postinstall.git -e ansible-user=your_win_user ansible_password=your_win_user_password`
+```
+ansible-pull –U https://github.com/gmarokov/ansible-win-postinstall.git -e ansible-user=your_win_user ansible_password=your_win_user_password
+```
 
 # Conclusion
 
-I'm sure you as developer make a lot of tweaks to your os, me too. Having a few more tweaks to add, would be great to
-share some ideas and extend it even further. I also created a playbooks for
-[Ubuntu](https://github.com/gmarokov/ansible-playbook-postinstall-ubuntu) and
-[Fedora](https://github.com/gmarokov/ansible-playbook-postinstall-fedora), check them out if you are using one of this
-distros.
+As a developer, you likely fine-tune your operating system to cater to your specific needs – I'm no exception. 
+I've also created playbooks for [Ubuntu](https://github.com/gmarokov/ansible-playbook-postinstall-ubuntu) 
+and [Fedora](https://github.com/gmarokov/ansible-playbook-postinstall-fedora). 
+Feel free to explore them if you're using one of these Linux distributions.

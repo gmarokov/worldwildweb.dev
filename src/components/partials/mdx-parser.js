@@ -49,7 +49,7 @@ const MdxParser = ({ children, embedded }) => {
 };
 
 MdxParser.propTypes = {
-  /** Embedded image dtails */
+  /** Embedded image details */
   embedded: PropTypes.any
 };
 

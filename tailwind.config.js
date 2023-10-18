@@ -130,10 +130,10 @@ module.exports = {
               background: theme('colors.gray.100'),
               color: theme('colors.gray.600') + '!important',
               '&::before': {
-                content: '"" !important'
+                content: 'none !important'
               },
               '&::after': {
-                content: '"" !important'
+                content: 'none !important'
               }
             },
             blockquote: {
@@ -195,7 +195,7 @@ module.exports = {
             },
             a: {
               color: theme('colors.fuchsia.400'),
-              fontWieght: theme('font-bold'),
+              fontWeight: theme('font-bold'),
               '&:hover': {
                 color: theme('colors.slate.100'),
                 transition: 'all 0.2s ease'
@@ -205,7 +205,10 @@ module.exports = {
               }
             },
             pre: {
-              background: theme('colors.surface')
+              background: theme('colors.surface'),
+              '& code': {
+                padding: '0'
+              }
             },
             code: {
               '& .prism-code': {
@@ -215,15 +218,15 @@ module.exports = {
                 }
               },
               fontWeight: '100',
-              padding: '0.25rem 0.5rem',
               borderRadius: '0.25rem',
+              padding: '0.25rem 0.5rem',
               background: theme('colors.surface'),
               color: theme('colors.slate.100') + '!important',
               '&::before': {
-                content: '"" !important'
+                content: 'none !important'
               },
               '&::after': {
-                content: '"" !important'
+                content: 'none !important'
               }
             },
             blockquote: {
