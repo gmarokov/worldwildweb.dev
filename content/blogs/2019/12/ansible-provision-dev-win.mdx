@@ -9,22 +9,20 @@ featuredImage: https://res.cloudinary.com/marokovdevapp/image/upload/v1697661520
 
 import Poll from '../../../../src/components/partials/poll';
 
-
 # Why Ansible for local machine
 
-I'm not sure if the majority of developers like setting up their own development machines or find this process cumbersome.
-Take the quick poll to find out!
+I'm not sure if the majority of developers like setting up their own development machines or find this process
+cumbersome. Take the quick poll to find out!
 
 <Poll></Poll>
 
-Being coding buddy to new starter colleagues, we have spent plenty of time trying to install multiple software tools and SDKs.
-This is common sense, right? So why not automate it? 
-All your company`s development software pre-install and ready to be used. Out of the box.
-I'd like to share my experience attempting to automate this process. It might be useful for someone trying to do something 
-crazy similar.
+Being coding buddy to new starter colleagues, we have spent plenty of time trying to install multiple software tools and
+SDKs. This is common sense, right? So why not automate it? All your company`s development software pre-install and ready
+to be used. Out of the box. I'd like to share my experience attempting to automate this process. It might be useful for
+someone trying to do something crazy similar.
 
-Using Ansible to target localhost on Linux is like click-click-go, but it's a bit different when it's comes to Windows. We
-need to install WSL on Windows, Ansible on WSL, Enable WinRM on Windows and finally control it from WSL.
+Using Ansible to target localhost on Linux is like click-click-go, but it's a bit different when it's comes to Windows.
+We need to install WSL on Windows, Ansible on WSL, Enable WinRM on Windows and finally control it from WSL.
 
 # Install Ansible on WSL
 
@@ -32,19 +30,19 @@ To start, let's the following commands from within PowerShell:
 
 1. **Enable WSL**: This command activates the Windows Subsystem for Linux.
 
-  ```
-  Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
-  ```
+```
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+```
 
-2. **Install Ubuntu**: Choose your desired Linux distribution and install it. 
-Here, I've used a command to install the Ubuntu distribution, but you're free to select another from list of supported systems.
-   
+2. **Install Ubuntu**: Choose your desired Linux distribution and install it. Here, I've used a command to install the
+   Ubuntu distribution, but you're free to select another from list of supported systems.
+
    ```
    Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1604 -OutFile Ubuntu.appx -UseBasicParsing
    ```
 
 3. **Update Packages**: Once you're inside your WSL, make sure to update the package list.
-   
+
    ```
    sudo apt-get update
    ```
@@ -58,7 +56,8 @@ Here, I've used a command to install the Ubuntu distribution, but you're free to
     sudo apt install ansible
    ```
 
-5. **Install Packages for WinRM Support**: This step equips your system with packages that are essential for WinRM support.
+5. **Install Packages for WinRM Support**: This step equips your system with packages that are essential for WinRM
+   support.
 
    ```
    sudo apt install python-pip
@@ -68,11 +67,10 @@ Here, I've used a command to install the Ubuntu distribution, but you're free to
 
 # Enabling WinRM
 
-By default, WinRM functions only for Private or Domain networks. Although you have the option to skip 
-network profile checks by providing the `-SkipNetworkProfileCheck` parameter to `Enable-PSRemoting`, 
-I wouldn't recommend it. 
-A safer approach is to designate your trusted network as private and then proceed to enable WinRM 
-using PowerShell with the following command:
+By default, WinRM functions only for Private or Domain networks. Although you have the option to skip network profile
+checks by providing the `-SkipNetworkProfileCheck` parameter to `Enable-PSRemoting`, I wouldn't recommend it. A safer
+approach is to designate your trusted network as private and then proceed to enable WinRM using PowerShell with the
+following command:
 
 ```
 Enable-PSRemoting
@@ -87,10 +85,10 @@ Set-Item -Path WSMan:\localhost\Service\AllowUnencrypted -Value $true
 
 # Running the Playbook
 
-With your environment configured, you can now use `ansible-pull` to run the playbook.
-The linked playbook installs Chocolatey and a selection of packages from it. Detailed list is available 
-in the [repository](https://github.com/gmarokov/ansible-win-postinstall). Feel free to modify it to your needs. 
-Provide your Windows machine's username and password to initiate the process.
+With your environment configured, you can now use `ansible-pull` to run the playbook. The linked playbook installs
+Chocolatey and a selection of packages from it. Detailed list is available in the
+[repository](https://github.com/gmarokov/ansible-win-postinstall). Feel free to modify it to your needs. Provide your
+Windows machine's username and password to initiate the process.
 
 ```
 ansible-pull –U https://github.com/gmarokov/ansible-win-postinstall.git -e ansible-user=your_win_user ansible_password=your_win_user_password
@@ -98,7 +96,7 @@ ansible-pull –U https://github.com/gmarokov/ansible-win-postinstall.git -e ans
 
 # Conclusion
 
-As a developer, you likely fine-tune your operating system to cater to your specific needs – I'm no exception. 
-I've also created playbooks for [Ubuntu](https://github.com/gmarokov/ansible-playbook-postinstall-ubuntu) 
-and [Fedora](https://github.com/gmarokov/ansible-playbook-postinstall-fedora). 
-Feel free to explore them if you're using one of these Linux distributions.
+As a developer, you likely fine-tune your operating system to cater to your specific needs – I'm no exception. I've also
+created playbooks for [Ubuntu](https://github.com/gmarokov/ansible-playbook-postinstall-ubuntu) and
+[Fedora](https://github.com/gmarokov/ansible-playbook-postinstall-fedora). Feel free to explore them if you're using one
+of these Linux distributions.
