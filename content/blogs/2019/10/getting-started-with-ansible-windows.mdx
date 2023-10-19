@@ -1,0 +1,189 @@
+---
+type: blog
+title: Getting started with Ansible and configuring Windows hosts
+tags: [Ansible, Windows]
+date: 2019-10-27
+author: Georgi Marokov
+featuredImage: https://res.cloudinary.com/marokovdevapp/image/upload/v1697739565/Blogs/ansible-win_tbrgev.png
+---
+
+# Ansible for the Win
+
+Ansible is well-known tool in the IT operations fields with its fantastic automation capabilities. The tool is
+classified under the group of state management systems known as "Desired State Configuration" (DSC) systems. In Desired
+State Configuration, the system's desired state, in terms of configurations and settings, is defined, and the DSC tool
+is responsible for ensuring that the actual state of the system matches this desired state.
+
+What makes Ansible stand out of other configuration management tools is that it’s agentless. 
+Ansible uses SSH for communication with Unix based hosts and WinRM for Windows hosts.  
+Recent announcement from Microsoft’s team is an upcoming fork of OpenSSH for Windows, which would make things ever
+smoother for DevOps teams managing Windows infrastructure.
+
+The agenda for this post is:
+
+1.  [Setup of the control Ansible machine.](/#setup-ansible-control-machine)
+2.  [Configure the controlled Windows servers in order to receive commands from Ansible.](/#configure-the-controlled-windows-servers).
+3.  [Create Ansible playbook and install Chocolatey and SQL Server.](/#write-our-first-playbook)
+
+*Ansible requires PowerShell version 3.0 and .NET Framework 4.0 or newer to function on older operating systems like
+Server 2008 and Windows 7.*
+
+If you covered the requirements, let’s get started.
+
+# Setup Ansible control machine
+
+As previously mentioned Ansible is agentless, but we need control machine — machine which talks to all of our hosts.
+
+**Ansible can’t run on Windows but there’s a trick.**
+
+Currently Ansible can only be installed on Unix based machines, but if you are using Windows as your primary OS, you can
+install Ubuntu subsystem. Read [this](https://docs.microsoft.com/en-us/windows/wsl/install-win10) for further
+installation details. If you are non Windows user please continue reading.
+
+## Install Ansible
+
+After the installation of Ubuntu subsystem on Windows (if you had so), lets proceed with the installation of Ansible by
+opening terminal.
+
+  1. Install Ubuntu repository management:    
+  `$ sudo apt-get install software-properties-common`
+
+  2. Lets update our system:     
+  `$ sudo apt-get update`
+
+  3. Add Ansible repository:   
+  `$ sudo apt-add-repository ppa:ansible/ansible` 
+
+  4. Then install Ansible:    
+  `$ apt-get install ansible`
+
+  5. Add Python package manager:    
+  `$ apt install python-pip`
+
+  6. Add Python WinRM client:    
+  `$ pip install pywinrm`
+
+  7. Install XML parser:    
+  `$ pip install xmltodict`
+
+  8. You can verify the installation by checking the current Ansible version:    
+  `$ ansible --version`
+
+So far, so good. Lets continue with configuration of the tool.
+
+## Configure Ansible
+
+### Configure hosts
+**Inventory — the list of hosts**
+
+**Inventory.yml** is the main configuration file of your hosts addresses separated in groups with descriptive names.
+
+  1. Let’s create the file:   
+  `$ vim inventory.yml`
+
+  2. Enter the IP/DNS addresses for your groups:
+  ```
+  [dbservers]
+  mydbserver1.dns.example 80.69.0.160
+
+  [webservers]
+  mywebserver1.dns.example 80.69.0.162
+  ```
+
+### Configure the connection
+
+We are a few steps away from establish connection to the remote servers. Let’s configure the connection itself —
+credentials, ports and type of connection. The convention is to name the config file based on your group of hosts.
+
+*If you want all of your inventory hosts to use that same configuration file you can name it as `all.yml`. We will use it 
+since all the hosts will share same credentials and connection type.*
+
+  1. Let’s begin by creating folder:   
+  `$ mkdir group_vars`
+
+  2. Create the file and edit it:   
+  `$ vim group_vars/all.yml`
+
+  3. Add the configuration details:  
+  ```
+  ansible_user: ansible_user
+  ansible_password: your_password_here
+  ansible_port: 5985
+  ansible_connection: winrm
+  ansible_winrm_transport: basic
+  ansible_winrm_operation_timeout_sec: 60
+  ansible_winrm_read_timeout_sec: 70
+  ```
+
+The credentials provided will be used to access the remote hosts with connection set to WinRM basic authentication. We will
+create them in the next section. In this example basic authentication will be used but for your production workloads you probably want to
+use more secure schema. 
+See [this](https://docs.ansible.com/ansible/latest/user_guide/windows_winrm.html?highlight=windows) article for more
+info.
+
+# Configure the controlled Windows servers
+
+Our Windows hosts need to be pre-configured before we are able to execute any commands on them. The following PowerShell script will do:
+
+1.  Create the Ansible user we defined in **all.yml**.
+2.  Add the user to the Administrators group.
+3.  Set WinRM authentication to basic and allow unencrypted connections.
+4.  Add Firewall rule for WinRM with your control machine IP address.
+
+  1. Open PowerShell on the host and execute the script:
+  ```
+  NET USER ansible_user "your_password_here" /ADD
+  NET LOCALGROUP "Administrators" "ansible_user" /ADD
+  Set-Item -Path WSMan:\localhost\Service\Auth\Basic -Value $true
+  Set-Item -Path WSMan:\localhost\Service\AllowUnencrypted -Value $true
+  netsh advfirewall firewall add rule name="WinRM" dir=in action=allow protocol=TCP localport=5985 remoteip=10.10.1.2
+  ```
+
+After the execution is completed we can try to ping our host from the control machine to verify that connection is OK. 
+We can ping only the DB servers:   
+`$ ansible dbservers -i inventory.yml -m win_ping`
+
+# Write our first playbook
+
+Getting back to our Ansible control machine to add a playbook — set of tasks or plays which together form the playbook.
+
+Our target here is to install Chocolatey which is the community driven package manager for Windows. After that we will
+install SQL Server and reboot the server.
+
+Ansible come with many modules for Windows with a lot of functionalities out of the box. They are prefixed with “win\_”
+like for example **win_feature**. You can check more
+[here](https://docs.ansible.com/ansible/latest/modules/list_of_windows_modules.html?highlight=windows) for your specific
+needs.
+
+  1. Let’s continue with the creation of the playbook file:   
+  `$ vim configure-win-server-playbook.yml`
+
+  2. In the file describe the playbook as follows:  
+  ```
+      ---
+      - hosts: dbservers
+        tasks:
+        - name: Install Chocolatey
+          raw: Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+        - name: Install SQL Server
+          win_chocolatey:
+          name: sql-server-2017
+          state: present
+
+        - name: Reboot to apply changes
+          win_reboot:
+            reboot_timeout: 3600
+  ```
+
+  3. Execute the playbook by executing the following:   
+  `$ ansible-playbook dbservers -i inventory.yml configure-win-server-playbook.yml`
+
+Each task running and returning status of execution and after reboot we are all ready!
+
+# Conclusion
+
+Ansible is really powerful tool and Microsoft and the community is doing really fantastic work for porting Ansible modules
+to Windows which are written in PowerShell. Yet the plan to have SSH feature on Windows is great too. No matter if your
+inventory is of physical or virtual servers, you should definitely try out Ansible on your infrastructure for saving
+time, money and of course avoid human mistakes by manually configure, deploy or provision those environments.

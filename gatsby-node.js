@@ -21,24 +21,24 @@ exports.createSchemaCustomization = async ({ actions: { createTypes } }) => {
     }
     type Frontmatter @dontInfer {
       type: String
-        title: String
-        name: String
-        icon: String
-        tags: [String]
-        url: String
-        date: Date @dateformat(formatString: "MMMM DD, YYYY")
-        dateModified: Date @dateformat(formatString: "MMMM DD, YYYY")
-        author: String
-        category: String
-        role: String
-        publication: String
-        status: String
-        isPrivate: Boolean
-        pinned: Boolean
-        logo: String
-        featuredImage: String
-        embeddedImages: [String]
-    }
+      title: String
+      name: String
+      icon: String
+      tags: [String]
+      url: String
+      date: Date @dateformat(formatString: "MMMM DD, YYYY")
+      dateModified: Date @dateformat(formatString: "MMMM DD, YYYY")
+      author: String
+      category: String
+      role: String
+      publication: String
+      status: String
+      isPrivate: Boolean
+      pinned: Boolean
+      logo: String
+      featuredImage: String
+      embeddedImages: [String]
+  }
   `);
 
   // Logs out all typeDefs
