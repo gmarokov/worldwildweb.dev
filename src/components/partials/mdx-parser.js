@@ -36,8 +36,12 @@ const components = {
       <code>{children}</code>
     );
   },
-  GatsbyImage: (props) => <GatsbyImage alt={props.alt} image={getImage(props.image)} className="my-16" />,
-  MarkdownCtaLink
+  GatsbyImage: (props) => <GatsbyImage 
+    alt={props.alt} 
+    image={getImage(props.image)} 
+    className="my-4" 
+    imgStyle={{ objectFit: 'contain' }} />,
+    MarkdownCtaLink
 };
 
 const MdxParser = ({ children, embedded }) => {
