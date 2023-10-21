@@ -24,7 +24,7 @@ const AllBlogs = () => {
           }
           featuredImage {
             childImageSharp {
-              thumbnail: gatsbyImageData(width: 320)
+              thumbnail: gatsbyImageData(width: 240)
             }
           }
         }
