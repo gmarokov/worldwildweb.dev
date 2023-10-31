@@ -1,4 +1,4 @@
-# Georgi Marokov's personal website [@WorldWildWeb.Dev(https://worldwildweb.dev)]
+# Georgi Marokov's personal website [@WorldWildWeb.Dev](https://worldwildweb.dev)
 
 [![Live](https://img.shields.io/website?label=Live&url=https%3A%2F%2Fworldwildweb.dev)](https://worldwildweb.dev)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f5f41871-632a-4cae-9eaa-f0e1275e1fdf/deploy-status)](https://app.netlify.com/sites/zesty-concha-3ffd9a/deploys)
@@ -23,20 +23,9 @@ Wanna share some ideas? Don't hesitate and contact me!
 1. Install Node.js >= 18
 2. Install Gatsby CLI >= 5
 3. Install packages: `npm i`
-4. Start site: `gatsby develop`
+4. Start site: `npm run start`
 5. Locate the browser at http://localhsot:8000
 6. Locate GraphQL http://localhost:8000/___graphql
 
 ### Commitlint common types 
-
-- build
-- chore
-- ci
-- docs
-- feat
-- fix
-- perf
-- refactor
-- revert
-- style
-- test
+build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test
