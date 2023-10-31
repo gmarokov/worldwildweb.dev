@@ -7,7 +7,7 @@ author: Georgi Marokov
 featuredImage: https://res.cloudinary.com/marokovdevapp/image/upload/v1697607446/Blogs/static-code-analysis_db4joo.png
 ---
 
-# Static Code Analysis: Building Quality Software
+# Building quality software
 
 Every developer aims to create predictable, maintainable, and high-quality software. But being human, we make mistakes.
 That's where automation comes in, from testing and deploying to running applications.
@@ -28,18 +28,17 @@ If you're curious about Dynamic Analysis, explore these articles:
 
 - [Dynamic Code Analysis Primer](https://securityboulevard.com/2021/02/dynamic-code-analysis-a-primer/)
 - [More on Dynamic Analysis](https://github.com/analysis-tools-dev/dynamic-analysis)
-- [Choosing Between Static and Dynamic Analysis](https://www.overops.com/blog/static-vs-dynamic-code-analysis-how-to-choose-between-them/)
 
 This post is Part 1 of the Static Analysis series. In the next post, we'll set up SonarCloud for an ASP.NET Core + React
 SPA application in a continuous integration pipeline.
 [Check it out here](/blogs/2021/06/analyze-aspnet-react-in-sonarcloud/).
 
-# Where to Use Static Code Analysis
+# Where to use static code analysis
 
 I found plenty of NuGet packages, IDE extensions and external services available on the market. That was hard to digest
 and probably I might miss some very helpful tools.
 
-## During Development
+## During development
 
 Using build-time code analysis in Visual Studio /Code (or other preferred tool), we enable developers to quickly
 understand what rules are being broken. This enables them to fix code earlier in the development lifecycle preventing
@@ -71,7 +70,7 @@ Consider extensions like:
 - [Rider](https://www.jetbrains.com/rider/) Another great IDE for .NET developers which comes with the power of
   ReSharper.
 
-## In Build Pipelines
+## In build pipelines
 
 Use NuGet packaged analyzers to automatically run as your project builds in CI. When a build encounters a code quality
 error, you can immediately fail the build, send alerts, or apply any other actions.
@@ -111,21 +110,17 @@ Different CI platforms may provide their own tool for security analysis:
 - Code Analyzers for projects using xUnit.net
   [https://www.nuget.org/packages/xunit.analyzers](https://www.nuget.org/packages/xunit.analyzers)
 
-## External Services
+## External services
 
 Consider these external services for static code analysis:
 
-- SonarCloud - [https://sonarcloud.io/](https://sonarcloud.io/) My go-to tool for .NET projects. They even have a
-  separate scanner for .NET. Pretty nice integration with Azure DevOps. Free for public projects.
-- Embold - [https://embold.io/](https://embold.io/) Fairly new tool with Free plan for 1M executable-lines-of-code for
-  public repositories.
-- CodeBeat - [https://codebeat.co/](https://codebeat.co/projects/gitlab-com-autohub-autohub-web-master) Free for public
-  repositories.
-- CodeFactor - [https://www.codefactor.io/](https://www.codefactor.io/dashboard) 1 private and unlimited free
-  repositories.
-- CodeClimate - [https://codeclimate.com/](https://codeclimate.com/github/gmarokov/dotnet-trx2sonar) 50 free
-  repositories.
-- Codacy - [https://www.codacy.com/](https://www.codacy.com/pricing) Paid service.
+- [SonarCloud](https://sonarcloud.io/) My go-to tool for .NET projects. They even have a separate scanner for .NET.
+  Pretty nice integration with Azure DevOps. Free for public projects.
+- [Embold](https://embold.io/) Fairly new tool with Free plan for 1M executable-lines-of-code for public repositories.
+- [Embold](https://codebeat.co/) Free for public repositories.
+- [CodeFactor](https://www.codefactor.io/) 1 private and unlimited free repositories.
+- [CodeClimate](https://codeclimate.com/) 50 free repositories.
+- [Codacy](https://www.codacy.com/) Paid service.
 
 ..and many more counting. These are the one I found easy to get started without installing and configuring additional
 software.
