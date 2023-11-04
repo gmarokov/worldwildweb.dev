@@ -41,7 +41,6 @@ module.exports = {
     defaultImage: '/static/images/aside-georgi.png'
   },
   plugins: [
-    'gatsby-plugin-gatsby-cloud',
     'gatsby-plugin-mdx-embed',
     'gatsby-plugin-image',
     'gatsby-transformer-sharp',
