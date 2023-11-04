@@ -9,9 +9,27 @@ const Footer = () => {
       <div className="pt-10 pb-10 border-t m-border">
         <div className="mb-6 sm:mb-0 flex flex-col sm:flex-row justify-between">
           <p>
-            <span>Built with <a target='_blank' href="https://www.gatsbyjs.com/"> Gatsby <span>{packageJson.dependencies.gatsby}</span></a></span> 
-            <span> at <a target='_blank' href="https://github.com/gmarokov/worldwildweb.dev">GitHub</a>, </span>
-            <span>hosted on <a target='_blank' href="https://www.netlify.comhttps://app.netlify.com/sites/wwwdev/deploys">Netlify</a></span>
+            <span>
+              Built with{' '}
+              <a target="_blank" href="https://www.gatsbyjs.com/">
+                {' '}
+                Gatsby <span>{packageJson.dependencies.gatsby}</span>
+              </a>
+            </span>
+            <span>
+              {' '}
+              at{' '}
+              <a target="_blank" href="https://github.com/gmarokov/worldwildweb.dev">
+                GitHub
+              </a>
+              ,{' '}
+            </span>
+            <span>
+              hosted on{' '}
+              <a target="_blank" href="https://www.netlify.comhttps://app.netlify.com/sites/wwwdev/deploys">
+                Netlify
+              </a>
+            </span>
           </p>
         </div>
       </div>
