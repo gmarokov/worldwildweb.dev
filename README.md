@@ -1,7 +1,7 @@
 # Georgi Marokov's personal website [@WorldWildWeb.Dev](https://worldwildweb.dev)
 
 [![Live](https://img.shields.io/website?label=Live&url=https%3A%2F%2Fworldwildweb.dev)](https://worldwildweb.dev)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f5f41871-632a-4cae-9eaa-f0e1275e1fdf/deploy-status)](https://app.netlify.com/sites/zesty-concha-3ffd9a/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f5f41871-632a-4cae-9eaa-f0e1275e1fdf/deploy-status)](https://app.netlify.com/sites/wwwdev/deploys)
 
 ## I'm Full stack .NET Developer [@Modeshift](https://modeshift.com)
 
