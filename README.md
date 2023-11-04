@@ -22,8 +22,8 @@ Wanna share some ideas? Don't hesitate and contact me!
 
 1. Install Node.js >= 18
 2. Install Gatsby CLI >= 5
-3. Install packages: `npm i`
-4. Start site: `npm run start`
+3. Install packages: `yarn install`
+4. Start site: `yarn start`
 5. Locate the browser at http://localhsot:8000
 6. Locate GraphQL http://localhost:8000/___graphql
 

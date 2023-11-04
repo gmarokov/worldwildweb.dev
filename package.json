@@ -39,7 +39,7 @@
     "faunadb": "^4.6.0",
     "gatsby": "^5.9.1",
     "gatsby-plugin-gatsby-cloud": "^5.0.0",
-    "gatsby-plugin-google-analytics": "^5.0.0",
+    "gatsby-plugin-google-gtag": "^5.12.3",
     "gatsby-plugin-image": "^3.0.0",
     "gatsby-plugin-mdx": "^3.20.0",
     "gatsby-plugin-mdx-embed": "^1.0.0",
