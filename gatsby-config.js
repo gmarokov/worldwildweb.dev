@@ -37,7 +37,7 @@ module.exports = {
       'Component Library',
       'Serverless Functions'
     ],
-    siteUrl: process.env.URL,
+    siteUrl: process.env.URL || 'http://localhost:8000',
     defaultImage: '/static/images/aside-georgi.png'
   },
   plugins: [
@@ -98,9 +98,11 @@ module.exports = {
       }
     },
     {
-      resolve: 'gatsby-plugin-google-analytics',
+      resolve: 'gatsby-plugin-google-gtag',
       options: {
-        trackingId: 'UA-76055934-4'
+        trackingIds: [
+          "G-2VPD7V1YCL"
+        ]
       }
     }
   ],
