@@ -5,9 +5,9 @@ const Footer = () => {
   const packageJson = usePackage();
 
   return (
-    <footer className="text-sm leading-6 mt-12 prose dark:prose-dark">
+    <footer className="text-sm leading-6 mt-12">
       <div className="pt-10 pb-10 border-t m-border">
-        <div className="mb-6 sm:mb-0 flex flex-col sm:flex-row justify-between">
+        <div className="mb-6 sm:mb-0 flex flex-col sm:flex-row justify-between prose dark:prose-dark">
           <p>
             <span>
               Built with{' '}
