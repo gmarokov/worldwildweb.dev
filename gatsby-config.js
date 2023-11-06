@@ -120,13 +120,13 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allMdx } }) => {
-              return allMdx.nodes.map(node => {
+              return allMdx.nodes.map((node) => {
                 return Object.assign({}, node.frontmatter, {
                   description: node.excerpt,
                   date: node.frontmatter.date,
                   url: site.siteMetadata.siteUrl + node.fields.slug,
                   guid: site.siteMetadata.siteUrl + node.fields.slug,
-                  custom_elements: [{ "content:encoded": node.excerpt }]
+                  custom_elements: [{ 'content:encoded': node.excerpt }]
                 });
               });
             },
@@ -147,8 +147,8 @@ module.exports = {
                 }
               }
             `,
-            output: "/rss.xml",
-            title: "WorldWildWeb.Dev's RSS Feed",
+            output: '/rss.xml',
+            title: "WorldWildWeb.Dev's RSS Feed"
           }
         ]
       }
