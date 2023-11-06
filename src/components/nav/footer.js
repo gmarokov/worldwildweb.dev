@@ -26,7 +26,7 @@ const Footer = () => {
             </span>
             <span>
               hosted on{' '}
-              <a target="_blank" href="https://www.netlify.comhttps://app.netlify.com/sites/wwwdev/deploys">
+              <a target="_blank" href="https://app.netlify.com/sites/wwwdev/deploys">
                 Netlify
               </a>
             </span>
