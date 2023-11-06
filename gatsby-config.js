@@ -103,7 +103,7 @@ module.exports = {
       }
     },
     {
-      resolve: `@jpfulton/gatsby-plugin-feed-mdx`,
+      resolve: `gatsby-plugin-feed-mdx`,
       options: {
         query: `
           {

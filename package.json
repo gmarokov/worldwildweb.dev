@@ -27,12 +27,12 @@
     "url": "https://github.com/gmarokov/worldwildweb.dev.git"
   },
   "dependencies": {
-    "@jpfulton/gatsby-plugin-feed-mdx": "^0.0.4",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "@typeform/embed-react": "^3.2.0",
     "cmdk": "^0.1.18",
     "gatsby": "^5.9.1",
+    "gatsby-plugin-feed-mdx": "^1.1.0",
     "gatsby-plugin-google-gtag": "^5.12.3",
     "gatsby-plugin-image": "^3.0.0",
     "gatsby-plugin-mdx": "^3.20.0",
