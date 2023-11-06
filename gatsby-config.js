@@ -101,6 +101,57 @@ module.exports = {
       options: {
         trackingIds: ['G-2VPD7V1YCL']
       }
+    },
+    {
+      resolve: `@jpfulton/gatsby-plugin-feed-mdx`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMdx } }) => {
+              return allMdx.nodes.map(node => {
+                return Object.assign({}, node.frontmatter, {
+                  description: node.excerpt,
+                  date: node.frontmatter.date,
+                  url: site.siteMetadata.siteUrl + node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + node.fields.slug,
+                  custom_elements: [{ "content:encoded": node.excerpt }]
+                });
+              });
+            },
+            query: `
+              {
+                allMdx(
+                  sort: { frontmatter: { date: DESC } }
+                ) {
+                  nodes {
+                    excerpt
+                    body
+                    fields { slug }
+                    frontmatter {
+                      title
+                      date
+                    }
+                  }
+                }
+              }
+            `,
+            output: "/rss.xml",
+            title: "WorldWildWeb.Dev's RSS Feed",
+          }
+        ]
+      }
     }
   ],
   partytownProxiedURLs: [`https://www.googletagmanager.com/gtag/js?id=${process.env.GATSBY_GA_MEASUREMENT_ID}`]

@@ -22,7 +22,7 @@ const Page = ({
       <div className="grid lg:grid-cols-1fr-auto">
         <DateStamp date={date} />
         <small className="leading-6 font-semibold m-sub-text">
-          Role &bull; {role} &#124; {category}
+          Category &bull; {role} &#124; {category}
         </small>
       </div>
       <h1 className="my-12 m-page-heading">{title}</h1>
