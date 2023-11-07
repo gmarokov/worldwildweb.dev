@@ -38,10 +38,6 @@ const SidebarNav = ({ pathname }) => {
 
                   return (
                     <li key={index} className="text-lg mb-2">
-
-
-
-                    
                       <Link
                         onClick={handleNav}
                         to={slug}
