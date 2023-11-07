@@ -48,19 +48,6 @@ exports.createSchemaCustomization = async ({ actions: { createTypes } }) => {
 exports.sourceNodes = ({ actions: { createNode }, createNodeId, createContentDigest }) => {
   const packageJson = require('./package.json');
 
-
-
-
-
-
-
-
-
-
-
-
-
-  
   createNode({
     ...packageJson,
     id: createNodeId(packageJson.version),
