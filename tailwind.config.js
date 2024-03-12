@@ -12,6 +12,9 @@ module.exports = {
     '!mt-0', // this is used by the p in index.mdx
     'my-20', // this is used in the grid in index.mdx
     'grid',
+    'grid-cols-2',
+    'col-span-2',
+    'gap-4',
     'md:grid-cols-1fr-1fr', // this is used in index.mdx
     'gap-8',
     'gap-32',
@@ -22,7 +25,13 @@ module.exports = {
     'text-violet-300',
     'text-violet-400',
     'text-violet-500',
-    'rotate-90'
+    'rotate-90',
+    'text-red-400',
+    'my-6',
+    'pl-4',
+    'px-3',
+    'columns-3',
+    'columns-2'
   ],
   theme: {
     extend: {
@@ -37,6 +46,11 @@ module.exports = {
       },
       animation: {
         'scaling-bar': 'bar 60s linear infinite'
+      },
+      purge: {
+        options: {
+          whitelist: ['text-red-400', 'my-6', 'pl-4', 'columns-3', 'columns-2']
+        }
       },
       fontFamily: {
         sans: ['Inconsolata', 'ui-sans-serif', 'system-ui'],
@@ -101,7 +115,7 @@ module.exports = {
               }
             },
             strong: {
-              color: theme('colors.gray.600')
+              color: theme('colors.gray.700')
             },
             a: {
               color: theme('colors.sky.500'),
@@ -115,7 +129,8 @@ module.exports = {
               }
             },
             pre: {
-              background: theme('colors.gray.100')
+              background: theme('colors.gray.100'),
+              color: theme('colors.gray.600')
             },
             code: {
               '& .prism-code': {
@@ -205,6 +220,7 @@ module.exports = {
               }
             },
             pre: {
+              color: theme('colors.slate.50'),
               background: theme('colors.surface'),
               '& code': {
                 padding: '0'

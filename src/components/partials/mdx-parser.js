@@ -37,7 +37,12 @@ const components = {
     );
   },
   GatsbyImage: (props) => (
-    <GatsbyImage alt={props.alt} image={getImage(props.image)} className="my-4" imgStyle={{ objectFit: 'contain' }} />
+    <GatsbyImage
+      alt={props.alt}
+      image={getImage(props.image)}
+      className={props.className}
+      imgStyle={{ objectFit: 'contain' }}
+    />
   ),
   MarkdownCtaLink
 };
