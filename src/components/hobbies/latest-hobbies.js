@@ -23,9 +23,9 @@ const LatestHobbies = () => {
             date(formatString: "MMMM DD, YYYY")
             category
           }
-          logo {
+          featuredImage {
             childImageSharp {
-              logo: gatsbyImageData(width: 24, quality: 100)
+              thumbnail: gatsbyImageData(width: 320)
             }
           }
         }
@@ -45,8 +45,8 @@ const LatestHobbies = () => {
             fields: { slug },
             excerpt,
             frontmatter: { title, date, category },
-            logo: {
-              childImageSharp: { logo }
+            featuredImage: {
+              childImageSharp: { thumbnail }
             }
           } = node;
 
@@ -55,7 +55,7 @@ const LatestHobbies = () => {
               key={index}
               link={slug}
               title={title}
-              logo={logo}
+              thumbnail={thumbnail}
               category={category}
               date={date}
               excerpt={excerpt}

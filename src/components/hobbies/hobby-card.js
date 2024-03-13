@@ -6,21 +6,25 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 import DateStamp from '../partials/date-stamp';
 
-const HobbyCard = ({ link, title, logo, category, date, excerpt }) => {
+const HobbyCard = ({ link, title, thumbnail, category, date, excerpt }) => {
   return (
     <li className="m-0 p-0 rounded border m-border transition-all shadow-lg hover:shadow-fuchsia/10 hover:-translate-y-2 ease-in-out duration-500">
       <Link to={link} className="block p-4 cursor-pointer no-underline">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-6 mb-2">
-          <div className="flex items-center gap-2">
-            <GatsbyImage alt={title} image={getImage(logo)} />
-            <strong className="flex text-sm">
-              {category} <span className="hidden sm:block ml-2 ">&bull;</span>
-            </strong>
+          <div className="rounded shadow-lg overflow-hidden shrink-0 w-auto md:w-[240px]">
+            <GatsbyImage alt={title} image={getImage(thumbnail)} />
           </div>
-          <DateStamp date={date} />
+          <div>
+            <div className="flex items-center gap-2">
+              <strong className="flex text-sm">
+                {category} <span className="hidden sm:block ml-2 ">&bull;</span>
+              </strong>
+              <DateStamp date={date} />
+            </div>
+            <h3 className="m-0 text-xl">{title}</h3>
+            <p className="m-0 text-base m-sub-text">{excerpt}</p>
+          </div>
         </div>
-        <h3 className="m-0 text-xl">{title}</h3>
-        <p className="m-0 text-base m-sub-text">{excerpt}</p>
       </Link>
     </li>
   );

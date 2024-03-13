@@ -11,7 +11,7 @@ const Footer = () => {
           <p>
             <span>
               Built with{' '}
-              <a target="_blank" href="https://www.gatsbyjs.com/">
+              <a target="_blank" rel="noreferrer" href="https://www.gatsbyjs.com/">
                 {' '}
                 Gatsby <span>{packageJson.dependencies.gatsby}</span>
               </a>
@@ -19,14 +19,14 @@ const Footer = () => {
             <span>
               {' '}
               at{' '}
-              <a target="_blank" href="https://github.com/gmarokov/worldwildweb.dev">
+              <a target="_blank" rel="noreferrer" href="https://github.com/gmarokov/worldwildweb.dev">
                 GitHub
               </a>
               ,{' '}
             </span>
             <span>
               hosted on{' '}
-              <a target="_blank" href="https://app.netlify.com/sites/wwwdev/deploys">
+              <a target="_blank" rel="noreferrer" href="https://app.netlify.com/sites/wwwdev/deploys">
                 Netlify
               </a>
             </span>

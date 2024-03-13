@@ -3,7 +3,9 @@ import { graphql } from 'gatsby';
 import MdxParser from '../components/partials/mdx-parser';
 import AsideElement from '../components/aside/aside-element';
 import DateStamp from '../components/partials/date-stamp';
-import GenericAside from '../components/aside/generic-aside';
+import FeaturedImageAside from '../components/aside/featured-image-aside';
+import TableOfContents from '../components/aside/table-of-contents';
+
 import Tag from '../components/partials/tag';
 import Seo from '../components/partials/seo';
 
@@ -13,7 +15,15 @@ const Page = ({
       fields: { slug },
       excerpt,
       frontmatter: { type, title, date, role, category, tags },
-      body
+      body,
+      featuredImage: {
+        childImageSharp: { thumbnail }
+      },
+      embeddedImages,
+      tableOfContents: { items: toc }
+    },
+    site: {
+      siteMetadata: { siteUrl }
     }
   }
 }) => {
@@ -37,9 +47,15 @@ const Page = ({
             })
           : null}
       </ul>
-      <MdxParser>{body}</MdxParser>
+      <MdxParser embedded={embeddedImages}>{body}</MdxParser>
       <AsideElement>
-        <GenericAside />
+        <FeaturedImageAside alt={title} thumbnail={thumbnail} shareText={`${title}\n ${siteUrl}${slug}`} />
+        {toc ? (
+          <div className="px-6">
+            <h5 className="mb-3 text-lg leading-6 font-semibold uppercase">On this page</h5>
+            <TableOfContents slug={slug} items={toc} />
+          </div>
+        ) : null}
       </AsideElement>
     </Fragment>
   );
@@ -60,7 +76,24 @@ export const query = graphql`
         category
         tags
       }
+      featuredImage {
+        childImageSharp {
+          thumbnail: gatsbyImageData(width: 240)
+          og: gatsbyImageData(width: 1200)
+        }
+      }
+      embeddedImages {
+        childImageSharp {
+          gatsbyImageData(layout: FULL_WIDTH)
+        }
+      }
+      tableOfContents
       body
+    }
+    site {
+      siteMetadata {
+        siteUrl
+      }
     }
   }
 `;
