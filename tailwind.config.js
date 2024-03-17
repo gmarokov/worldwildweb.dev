@@ -13,6 +13,8 @@ module.exports = {
     'my-20', // this is used in the grid in index.mdx
     'grid',
     'grid-cols-2',
+    'grid-cols-1',
+    'md:grid-cols-2',
     'col-span-2',
     'gap-4',
     'md:grid-cols-1fr-1fr', // this is used in index.mdx
