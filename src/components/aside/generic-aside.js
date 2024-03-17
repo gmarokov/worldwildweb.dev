@@ -9,7 +9,7 @@ const GenericAside = () => {
     <Fragment>
       <div className="grid gap-4 rounded border m-border px-4 sm:px-6 py-6">
         <StaticImage
-          alt="Introducing Gatsby 4"
+          alt="Welcome to Georgi Marokov's blog!"
           src="../../../static/images/aside-georgi.png"
           className="block rounded-full border-2 m-border h-28 w-28 m-0 mx-auto"
         />
@@ -32,7 +32,7 @@ const GenericAside = () => {
           Follow on X
         </a>
       </div>
-      <RecentGitHubUserEvent />
+      {/* <RecentGitHubUserEvent /> */}
     </Fragment>
   );
 };
