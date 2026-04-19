@@ -31,7 +31,7 @@ const RecentTweets = () => {
           })
         ).json();
 
-        if (isMounted) {
+        if (isMounted.current) {
           setResponse({
             tweets: tweetsData.tweets,
             user: userData.user

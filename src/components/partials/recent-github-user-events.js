@@ -32,7 +32,7 @@ const RecentGitHubUserEvent = () => {
           })
         ).json();
 
-        if (isMounted) {
+        if (isMounted.current) {
           setResponse({
             events: eventsData.events,
             user: userData.user
