@@ -36,7 +36,7 @@ HobbyCard.propTypes = {
   /** The title to display */
   title: PropTypes.string.isRequired,
   /** Gatsby Image Data */
-  logo: PropTypes.any.isRequired,
+  thumbnail: PropTypes.any.isRequired,
   /** The category to display */
   category: PropTypes.string.isRequired,
   /** The date to display */
