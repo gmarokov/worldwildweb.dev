@@ -167,8 +167,8 @@ exports.createPages = async ({ graphql, actions: { createPage, createRedirect } 
       context: {
         id: id
       },
-      defer: type === 'blog' || type === 'project'
-      // defer: index + 1 > 50
+      // Generate content at build time so Netlify can serve it without a DSG function.
+      defer: false
     });
   });
 };
